@@ -1,0 +1,25 @@
+﻿@page "/Bank"
+@using Cautionem.Models
+
+@inject IStringLocalizer<Bank> Localizer
+
+<RadzenCard>
+    <div class="row">
+        <div class="col-4">@Localizer["bankname"]</div>
+        <div class="col-8"><input type="text" @bind="@bank.Name" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">@Localizer["bankdescription"]</div>
+        <div class="col-8"><input type="text" @bind="@bank.Description" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">@Localizer["bankaccount"]</div>
+        <div class="col-8"><input type="text" @bind="@bank.Account" /></div>
+    </div>
+</RadzenCard>
+
+@code{
+    [Parameter]
+    public Cautionem.Models.Bank bank { get; set; }
+
+}

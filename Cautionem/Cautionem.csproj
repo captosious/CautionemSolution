@@ -12,6 +12,7 @@
     <Folder Include="Resources\Pages\" />
     <Folder Include="Resources\Models\" />
     <Folder Include="Resources\Shared\" />
+    <Folder Include="Resources\Components\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.7">
@@ -39,6 +40,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SharedLocalizer.es-ES.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Components\Bank.es-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Bank.es-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\Pages\Company.es-ES.Designer.cs">
@@ -52,6 +57,9 @@
     </Compile>
     <Compile Update="Resources\Shared\SharedLocalizer.ca-ES.Designer.cs">
       <DependentUpon>SharedLocalizer.ca-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Components\Bank.es-ES.Designer.cs">
+      <DependentUpon>Bank.es-ES.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

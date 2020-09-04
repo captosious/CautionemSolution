@@ -12,7 +12,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-
+using Radzen;
 using Cautionem.Models;
 using Cautionem.Data;
 using Cautionem.Shared;
@@ -39,6 +39,8 @@ namespace Cautionem
             );
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddScoped<DialogService>();
+            services.AddScoped<NotificationService>();
             // Configuration
             services.AddSingleton<MyAppSettings>();
             services.AddSingleton<SharedLocalizer>();

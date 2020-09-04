@@ -34,28 +34,28 @@
         <button class="btn btn_general btn-success" @onclick="SaveCompany">@SharedLocalizer["MSG_SAVE"]</button>
     </div>
     <div>
-        <h1>@Localizer["banks"]</h1>
-        @{
-            foreach (Bank bank in banks)
-            {
-                <div class="row">
-                    <div class="col-1">@Localizer["bankname"]</div>
-                    <div class="col-5"><input type="text" @bind="@bank.Name" /></div>
-                    <div class="col-1">@Localizer["bankaccount"]</div>
-                    <div class="col-5"><input type="text" @bind="@bank.Account" /></div>
-                    <div class="col-5">
-                        <button class="btn btn_general btn-success" @onclick="BankEdit(bank)">@SharedLocalizer["MSG_EDIT"]</button>
+        
+            <h1>@Localizer["banks"]</h1>
+            @{
+                foreach (Bank bank in banks)
+                {
+                    <div class="row">
+                        <div class="col-1">@Localizer["bankname"]</div>
+                        <div class="col-4"><input type="text" @bind="@bank.Name" /></div>
+                        <div class="col-1">@Localizer["bankaccount"]</div>
+                        <div class="col-4"><input type="text" @bind="@bank.Account" /></div>
+                        <div class="col-2">
+                            <button class="btn btn_general btn-success" @onclick="@(() => BankEdit(bank))">@SharedLocalizer["MSG_EDIT"]</button>
+                        </div>
                     </div>
-                </div>
+                }
             }
-        }
     </div>
 
     @code
 {
         private Cautionem.Models.Company company = new Cautionem.Models.Company();
         private IEnumerable<Bank> banks = new List<Bank>();
-
 
         protected override async Task OnInitializedAsync()
         {
@@ -70,8 +70,8 @@
         }
 
         // BANK
-        private async void BankEdit(Bank bank)
+        private void BankEdit(Bank bank)
         {
-            dialogService.Open
+             dialogService.Open<Components.Bank>("Bank",null, null);
         }
     }
