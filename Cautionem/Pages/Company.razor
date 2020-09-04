@@ -1,0 +1,19 @@
+﻿@page "/Company"
+@inject Cautionem.Data.CompanyService companyService;
+
+<h1>Hello, world!</h1>
+
+<div class="row">
+    <div class="col-4">Empresa:</div>
+    <div class="col-8">@company.Name</div>
+</div>
+
+@code
+{
+    private Cautionem.Models.Company company = new Cautionem.Models.Company();
+
+    protected override async Task OnInitializedAsync()
+    {
+        company = await companyService.Get(1);
+    }
+}
