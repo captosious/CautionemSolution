@@ -1,9 +1,33 @@
 ﻿@page "/Bank"
 @using Cautionem.Models
-
+@inject Cautionem.Data.BankService bankService
 @inject IStringLocalizer<Bank> Localizer
 
-<RadzenCard>
+<div>
+    <h1>@Localizer["banks"]</h1>
+    @{
+        <table class="table table-hover table-condensed table-list-general table-sm">
+            <thead>
+                <tr>
+                    <th>@Localizer["bankname"]</th>
+                    <th>@Localizer["bankdescription"]</th>
+                    <th>@Localizer["bankaccount"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Cautionem.Models.Bank bankloop in banks)
+                {
+                    <tr class="" role="button" @onclick="@(() => BankEdit(bankloop))">
+                        <td>@bankloop.Name</td>
+                        <td>@bankloop.Description</td>
+                        <td>@bankloop.Account</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<div>
     <div class="row">
         <div class="col-4">@Localizer["bankname"]</div>
         <div class="col-8"><input type="text" @bind="@bank.Name" /></div>
@@ -16,10 +40,26 @@
         <div class="col-4">@Localizer["bankaccount"]</div>
         <div class="col-8"><input type="text" @bind="@bank.Account" /></div>
     </div>
-</RadzenCard>
+</div>
+
+<button class="btn btn_general btn-success" @onclick="Save">@SharedLocalizer["MSG_EDIT"]</button>
 
 @code{
-    [Parameter]
-    public Cautionem.Models.Bank bank { get; set; }
+    private Cautionem.Models.Bank bank = new Cautionem.Models.Bank();
+    private IEnumerable<Cautionem.Models.Bank> banks = new List<Cautionem.Models.Bank>();
 
+    protected override async Task OnInitializedAsync()
+    {
+        this.banks = await bankService.GetAll(1);
+    }
+
+    private void BankEdit(Cautionem.Models.Bank bank)
+    {
+        this.bank = bank;
+    }
+
+    private async void Save()
+    {
+        await bankService.Save(this.bank);
+    }
 }

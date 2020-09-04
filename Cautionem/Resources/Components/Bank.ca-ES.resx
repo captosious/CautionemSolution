@@ -13,33 +13,19 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     
-    <!-- MESSAGES -->
-    
-    <data name="MSG001" xml:space="preserve">
-        <value>Empresa</value>
+    <data name="banks" xml:space="preserve">
+        <value>Bancs</value>
     </data>
     
-    <data name="FiscalID" xml:space="preserve">
-        <value>NIF/CIF</value>
+    <data name="bankname" xml:space="preserve">
+        <value>Nom Banc</value>
     </data>
     
-    <data name="Name" xml:space="preserve">
-        <value>Nom</value>
+    <data name="bankdescription" xml:space="preserve">
+        <value>Detall</value>
     </data>
     
-    <data name="Email" xml:space="preserve">
-        <value>eCorreu</value>
-    </data>
-    
-    <data name="Address" xml:space="preserve">
-        <value>Adreça</value>
-    </data>
-    
-    <data name="Town" xml:space="preserve">
-        <value>Ciutat</value>
-    </data>
-    
-    <data name="zip" xml:space="preserve">
-        <value>Codi Postal</value>
+    <data name="bankaccount" xml:space="preserve">
+        <value>Compte Bancari IBAN</value>
     </data>
 </root>

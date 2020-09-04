@@ -44,13 +44,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Bank.es-ES.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Components\Bank.ca-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Bank.ca-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\Pages\Company.es-ES.Designer.cs">
       <DependentUpon>Company.es-ES.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Pages\Company.ca-ES.Designer.cs">
-      <DependentUpon>Company.ca-ES.resx</DependentUpon>
+      <DependentUpon>CompanySetup.ca-ES.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Shared\SharedLocalizer.es-ES.Designer.cs">
       <DependentUpon>SharedLocalizer.es-ES.resx</DependentUpon>
@@ -60,6 +64,12 @@
     </Compile>
     <Compile Update="Resources\Components\Bank.es-ES.Designer.cs">
       <DependentUpon>Bank.es-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Components\Bank.es-ES.Designer.cs">
+      <DependentUpon>Bank.es-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Components\Bank.ca-ES.Designer.cs">
+      <DependentUpon>Bank.ca-ES.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

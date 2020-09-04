@@ -19,12 +19,12 @@ namespace Cautionem.Data
             this.cautionemContext = cautionemContext;
         }
 
-        public async Task<Company> CompanyGet(int companyId)
+        public async Task<Company> Get(int companyId)
         {
             return await Task.FromResult((Company)cautionemContext.Company.FirstOrDefault(x => x.CompanyId == companyId));
         }
 
-        public async Task CompanySave(Company company)
+        public async Task Save(Company company)
         {
             cautionemContext.Company.Update(company);
             //if (cautionemContext.ModelState.IsValid)
@@ -32,12 +32,6 @@ namespace Cautionem.Data
                 await cautionemContext.SaveChangesAsync();
             //}
         }
-
-        public async Task<IEnumerable<Bank>> BankGet(int companyId)
-        {
-            return await Task.FromResult((IEnumerable<Bank>)cautionemContext.Bank.Where(x => x.CompanyId == companyId));
-        }
-
 
     }
 }

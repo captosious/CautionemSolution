@@ -1,0 +1,50 @@
+﻿@page "/Company"
+@using Cautionem.Models
+
+@inject DialogService dialogService
+@inject Cautionem.Data.CompanyService companyService
+@inject IStringLocalizer<Company> Localizer
+
+<div>
+    <h1>@Localizer["Empresa"]</h1>
+    <div class="row">
+        <div class="col-4">@Localizer["Empresa"]</div>
+        <div class="col-8"><input type="text" @bind="@company.Name" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">@Localizer["NIF"]</div>
+        <div class="col-8"><input type="text" @bind="@company.FiscalId" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">@Localizer["Address"]</div>
+        <div class="col-8"><input type="text" @bind="@company.Address" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">@Localizer["Town"]</div>
+        <div class="col-8"><input type="text" @bind="@company.City" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">@Localizer["zip"]</div>
+        <div class="col-8"><input type="text" @bind="@company.ZipCode" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">@Localizer["Email"]</div>
+        <div class="col-8"><input type="text" @bind="@company.Email" /></div>
+    </div>
+    <button class="btn btn_general btn-success" @onclick="SaveCompany">@SharedLocalizer["MSG_SAVE"]</button>
+</div>
+
+@code {
+
+    private Cautionem.Models.Company company = new Cautionem.Models.Company();
+
+    protected override async Task OnInitializedAsync()
+    {
+        company = await companyService.Get(1);
+    }
+
+    private async void SaveCompany()
+    {
+        await companyService.Save(company);
+    }
+}

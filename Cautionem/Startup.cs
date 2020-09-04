@@ -46,7 +46,7 @@ namespace Cautionem
             services.AddSingleton<SharedLocalizer>();
             // Services
             services.AddScoped<CompanyService>();
-
+            services.AddScoped<BankService>();
             // Add LocalLanguages.
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Cautionem.Resources.Pages {
+namespace Cautionem.Resources.Components {
     using System;
     using System.Reflection;
     
@@ -16,21 +16,21 @@ namespace Cautionem.Resources.Pages {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Company_es_ES {
+    internal class Bank_ca_ES {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Company_es_ES() {
+        internal Bank_ca_ES() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Cautionem.Resources.Pages.Company.es-ES", typeof(Company_es_ES).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Cautionem.Resources.Components.Bank.ca-ES", typeof(Bank_ca_ES).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -47,63 +47,27 @@ namespace Cautionem.Resources.Pages {
             }
         }
         
-        internal static string Empresa {
-            get {
-                return ResourceManager.GetString("Empresa", resourceCulture);
-            }
-        }
-        
-        internal static string FiscalID {
-            get {
-                return ResourceManager.GetString("FiscalID", resourceCulture);
-            }
-        }
-        
-        internal static string Name {
-            get {
-                return ResourceManager.GetString("Name", resourceCulture);
-            }
-        }
-        
-        internal static string Email {
-            get {
-                return ResourceManager.GetString("Email", resourceCulture);
-            }
-        }
-        
-        internal static string Address {
-            get {
-                return ResourceManager.GetString("Address", resourceCulture);
-            }
-        }
-        
-        internal static string Town {
-            get {
-                return ResourceManager.GetString("Town", resourceCulture);
-            }
-        }
-        
-        internal static string zip {
-            get {
-                return ResourceManager.GetString("zip", resourceCulture);
-            }
-        }
-        
         internal static string banks {
             get {
                 return ResourceManager.GetString("banks", resourceCulture);
             }
         }
         
-        internal static string bankaccount {
-            get {
-                return ResourceManager.GetString("bankaccount", resourceCulture);
-            }
-        }
-        
         internal static string bankname {
             get {
                 return ResourceManager.GetString("bankname", resourceCulture);
+            }
+        }
+        
+        internal static string bankdescription {
+            get {
+                return ResourceManager.GetString("bankdescription", resourceCulture);
+            }
+        }
+        
+        internal static string bankaccount {
+            get {
+                return ResourceManager.GetString("bankaccount", resourceCulture);
             }
         }
     }
