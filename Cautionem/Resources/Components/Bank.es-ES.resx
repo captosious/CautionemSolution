@@ -13,12 +13,16 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     
+    <data name="banks" xml:space="preserve">
+        <value>Bancos</value>
+    </data>
+    
     <data name="bankname" xml:space="preserve">
         <value>Nombre Banco</value>
     </data>
     
     <data name="bankdescription" xml:space="preserve">
-        <value>Descripción</value>
+        <value>Detalle</value>
     </data>
     
     <data name="bankaccount" xml:space="preserve">
