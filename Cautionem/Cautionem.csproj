@@ -8,6 +8,8 @@
     <Folder Include="Models\" />
     <Folder Include="Components\" />
     <Folder Include="Data\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Pages\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.7">
@@ -15,5 +17,24 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.21" />
+    <PackageReference Include="MySql.Data" Version="8.0.21" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Pages\Company.es-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Company.es-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Pages\Company.ca-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Company.ca-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\Pages\Company.es-ES.Designer.cs">
+      <DependentUpon>Company.es-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Pages\Company.ca-ES.Designer.cs">
+      <DependentUpon>Company.ca-ES.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

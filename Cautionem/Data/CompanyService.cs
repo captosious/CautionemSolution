@@ -8,8 +8,8 @@ namespace Cautionem.Data
 {
     public class CompanyService
     {
-        private MyAppSettings myAppSettings;
-        private CautionemContext cautionemContext;
+        private readonly MyAppSettings myAppSettings;
+        private readonly CautionemContext cautionemContext;
 
         public CompanyService(MyAppSettings appSettings, CautionemContext cautionemContext)
         {
@@ -19,7 +19,7 @@ namespace Cautionem.Data
 
         public async Task<Company> Get(int companyId)
         {
-            return (Company)cautionemContext.Company.FirstOrDefault(c=> c.CompanyId == companyId);
+            return await Task.FromResult ((Company)cautionemContext.Company.FirstOrDefault(x => x.CompanyId == companyId));
         }
     }
 }
