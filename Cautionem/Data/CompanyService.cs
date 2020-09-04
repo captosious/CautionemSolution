@@ -19,7 +19,7 @@ namespace Cautionem.Data
 
         public async Task<Company> Get(int companyId)
         {
-            return await Task.FromResult ((Company)cautionemContext.Company.FirstOrDefault(x => x.CompanyId == companyId));
+            return await Task.FromResult((Company)cautionemContext.Company.FirstOrDefault(x => x.CompanyId == companyId));
         }
     }
 }
