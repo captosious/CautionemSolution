@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+
 using Cautionem.Models;
 
 namespace Cautionem.Data
@@ -17,9 +19,25 @@ namespace Cautionem.Data
             this.cautionemContext = cautionemContext;
         }
 
-        public async Task<Company> Get(int companyId)
+        public async Task<Company> CompanyGet(int companyId)
         {
             return await Task.FromResult((Company)cautionemContext.Company.FirstOrDefault(x => x.CompanyId == companyId));
         }
+
+        public async Task CompanySave(Company company)
+        {
+            cautionemContext.Company.Update(company);
+            //if (cautionemContext.ModelState.IsValid)
+            //{
+                await cautionemContext.SaveChangesAsync();
+            //}
+        }
+
+        public async Task<IEnumerable<Bank>> BankGet(int companyId)
+        {
+            return await Task.FromResult((IEnumerable<Bank>)cautionemContext.Bank.Where(x => x.CompanyId == companyId));
+        }
+
+
     }
 }

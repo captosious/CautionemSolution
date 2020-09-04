@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cautionem.Models
+namespace Cautionem.Shared
 {
     public class SharedLocalizer
     {

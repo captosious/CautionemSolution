@@ -47,9 +47,9 @@ namespace Cautionem.Resources.Pages {
             }
         }
         
-        internal static string MSG001 {
+        internal static string Empresa {
             get {
-                return ResourceManager.GetString("MSG001", resourceCulture);
+                return ResourceManager.GetString("Empresa", resourceCulture);
             }
         }
         
@@ -86,6 +86,18 @@ namespace Cautionem.Resources.Pages {
         internal static string zip {
             get {
                 return ResourceManager.GetString("zip", resourceCulture);
+            }
+        }
+        
+        internal static string banks {
+            get {
+                return ResourceManager.GetString("banks", resourceCulture);
+            }
+        }
+        
+        internal static string bankaccount {
+            get {
+                return ResourceManager.GetString("bankaccount", resourceCulture);
             }
         }
     }

@@ -1,19 +1,63 @@
 ﻿@page "/Company"
-@inject Cautionem.Data.CompanyService companyService;
+@using Cautionem.Models
 
-<h1>Hello, world!</h1>
+@inject Cautionem.Data.CompanyService companyService
+@inject IStringLocalizer<Company> Localizer
+
+<h1>@Localizer["Empresa"]</h1>
 
 <div class="row">
-    <div class="col-4">Empresa:</div>
-    <div class="col-8">@company.Name</div>
+    <div class="col-4">@Localizer["Empresa"]</div>
+    <div class="col-8"><input type="text" @bind="@company.Name" /></div>
 </div>
+<div class="row">
+    <div class="col-4">@Localizer["NIF"]</div>
+    <div class="col-8"><input type="text" @bind="@company.FiscalId" /></div>
+</div>
+<div class="row">
+    <div class="col-4">@Localizer["Address"]</div>
+    <div class="col-8"><input type="text" @bind="@company.Address" /></div>
+</div>
+<div class="row">
+    <div class="col-4">@Localizer["Town"]</div>
+    <div class="col-8"><input type="text" @bind="@company.City" /></div>
+</div>
+<div class="row">
+    <div class="col-4">@Localizer["zip"]</div>
+    <div class="col-8"><input type="text" @bind="@company.ZipCode" /></div>
+</div>
+<div class="row">
+    <div class="col-4">@Localizer["Email"]</div>
+    <div class="col-8"><input type="text" @bind="@company.Email" /></div>
+</div>
+<button class="btn btn_general btn-success" @onclick="SaveData">@SharedLocalizer["MSG_SAVE"]</button>
+
+<h1>@Localizer["banks"]</h1>
+@{
+    foreach (Bank bank in banks)
+    {
+        <div class="row">
+            <div class="col-4">@Localizer["bankaccount"]</div>
+            <div class="col-8"><input type="text" @bind="@bank.Account" /></div>
+        </div>
+    }
+}
+
 
 @code
 {
     private Cautionem.Models.Company company = new Cautionem.Models.Company();
+    private IEnumerable<Bank> banks = new List<Bank>();
+
 
     protected override async Task OnInitializedAsync()
     {
-        company = await companyService.Get(1);
+        company = await companyService.CompanyGet(1);
+        banks = await companyService.BankGet(1);
+    }
+
+    private async void SaveData()
+    {
+        await companyService.CompanySave(company);
     }
 }

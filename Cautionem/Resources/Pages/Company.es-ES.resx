@@ -15,7 +15,7 @@
     
     <!-- MESSAGES -->
     
-    <data name="MSG001" xml:space="preserve">
+    <data name="Empresa" xml:space="preserve">
         <value>Empresa</value>
     </data>
     
@@ -41,5 +41,13 @@
     
     <data name="zip" xml:space="preserve">
         <value>Codi Postal</value>
+    </data>
+    
+    <data name="banks" xml:space="preserve">
+        <value>Bancos</value>
+    </data>
+    
+    <data name="bankaccount" xml:space="preserve">
+        <value>Cuenta Bancaria</value>
     </data>
 </root>

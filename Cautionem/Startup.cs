@@ -8,11 +8,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 using Cautionem.Models;
 using Cautionem.Data;
+using Cautionem.Shared;
 
 namespace Cautionem
 {
@@ -38,9 +41,12 @@ namespace Cautionem
             services.AddServerSideBlazor();
             // Configuration
             services.AddSingleton<MyAppSettings>();
-
+            services.AddSingleton<SharedLocalizer>();
             // Services
             services.AddScoped<CompanyService>();
+
+            // Add LocalLanguages.
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
 
         }
 
@@ -57,6 +63,21 @@ namespace Cautionem
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // Globalization Init
+            IList<CultureInfo> supportedCultures = new List<CultureInfo>
+            {
+                new CultureInfo("en-GB"),
+                new CultureInfo("es-ES"),
+                new CultureInfo("ca-ES"),
+            };
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("es-ES"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
