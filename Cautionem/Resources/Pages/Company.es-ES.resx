@@ -50,4 +50,8 @@
     <data name="bankaccount" xml:space="preserve">
         <value>Cuenta Bancaria</value>
     </data>
+    
+    <data name="bankname" xml:space="preserve">
+        <value>Nombre Banco</value>
+    </data>
 </root>

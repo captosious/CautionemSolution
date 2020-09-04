@@ -20,6 +20,7 @@
     </PackageReference>
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.21" />
     <PackageReference Include="MySql.Data" Version="8.0.21" />
+    <PackageReference Include="Radzen.Blazor" Version="2.11.17" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resources\Pages\Company.es-ES.resx">
@@ -40,9 +41,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Resources\Shared\SharedLocalizer.ca-ES.Designer.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Update="Resources\Pages\Company.es-ES.Designer.cs">
       <DependentUpon>Company.es-ES.resx</DependentUpon>
     </Compile>
@@ -51,6 +49,9 @@
     </Compile>
     <Compile Update="Resources\Shared\SharedLocalizer.es-ES.Designer.cs">
       <DependentUpon>SharedLocalizer.es-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Shared\SharedLocalizer.ca-ES.Designer.cs">
+      <DependentUpon>SharedLocalizer.ca-ES.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

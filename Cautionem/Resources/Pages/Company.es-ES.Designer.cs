@@ -100,5 +100,11 @@ namespace Cautionem.Resources.Pages {
                 return ResourceManager.GetString("bankaccount", resourceCulture);
             }
         }
+        
+        internal static string bankname {
+            get {
+                return ResourceManager.GetString("bankname", resourceCulture);
+            }
+        }
     }
 }

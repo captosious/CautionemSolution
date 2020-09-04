@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Cautionem.Resources.Models {
+namespace Cautionem.Resources.Shared {
     using System;
     using System.Reflection;
     
@@ -30,7 +30,7 @@ namespace Cautionem.Resources.Models {
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Cautionem.Resources.Models.SharedLocalizer.ca-ES", typeof(SharedLocalizer_ca_ES).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Cautionem.Resources.Shared.SharedLocalizer.ca-ES", typeof(SharedLocalizer_ca_ES).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
