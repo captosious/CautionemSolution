@@ -58,7 +58,7 @@
     </data>
     
     <data name="OP_WARNING_TITLE" xml:space="preserve">
-        <value>Atenció</value>
+        <value>Atenció</value> 
     </data>
     
     <data name="OP_WARNING" xml:space="preserve">

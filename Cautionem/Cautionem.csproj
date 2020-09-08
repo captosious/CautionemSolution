@@ -57,6 +57,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CompanySetup.es-ES.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Components\PaymentType.ca-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PaymentType.ca-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Pages\CompanySetup.ca-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CompanySetup.ca-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\Pages\Company.es-ES.Designer.cs">
@@ -88,6 +96,12 @@
     </Compile>
     <Compile Update="Resources\Pages\CompanySetup.es-ES.Designer.cs">
       <DependentUpon>CompanySetup.es-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Components\PaymentType.ca-ES.Designer.cs">
+      <DependentUpon>PaymentType.ca-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Pages\CompanySetup.ca-ES.Designer.cs">
+      <DependentUpon>CompanySetup.ca-ES.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
