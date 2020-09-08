@@ -47,6 +47,7 @@ namespace Cautionem
             // Services
             services.AddScoped<CompanyService>();
             services.AddScoped<BankService>();
+            services.AddScoped<PaymentTypeService>();
             // Add LocalLanguages.
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 

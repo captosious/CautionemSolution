@@ -21,7 +21,8 @@
     </PackageReference>
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.21" />
     <PackageReference Include="MySql.Data" Version="8.0.21" />
-    <PackageReference Include="Radzen.Blazor" Version="2.11.17" />
+    <PackageReference Include="Radzen.Blazor" Version="2.11.18" />
+    <PackageReference Include="Blazorise.Bootstrap" Version="0.9.1.2" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resources\Pages\Company.es-ES.resx">
@@ -48,6 +49,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Bank.ca-ES.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Components\PaymentType.es-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PaymentType.es-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\Pages\Company.es-ES.Designer.cs">
@@ -70,6 +75,9 @@
     </Compile>
     <Compile Update="Resources\Components\Bank.ca-ES.Designer.cs">
       <DependentUpon>Bank.ca-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Components\PaymentType.es-ES.Designer.cs">
+      <DependentUpon>PaymentType.es-ES.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>
