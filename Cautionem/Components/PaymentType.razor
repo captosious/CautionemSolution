@@ -30,7 +30,8 @@
                 <AddonLabel Style="width:100px">@Localizer["paymenttypename"]</AddonLabel>
             </Addon>
             <Addon AddonType="AddonType.Body">
-                <TextEdit @bind-Value="@paymentType.Name" />
+                <TextEdit @bind-Text="@paymentType.Name" />
+
             </Addon>
         </Addons>
     </div>
@@ -40,7 +41,7 @@
                 <AddonLabel Style="width:100px">@Localizer["paymenttypeterms"]</AddonLabel>
             </Addon>
             <Addon AddonType="AddonType.Body">
-                <TextEdit @bind-Value="@paymentType.Terms" />
+                <TextEdit @bind-Text="@paymentType.Terms" />
             </Addon>
         </Addons>
     </div>

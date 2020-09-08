@@ -2,6 +2,14 @@ html, body {
     font-family: 'Barlow';
 }
 
+.column_style {
+    margin: 5px;
+}
+
+.addonlabel_style {
+    width: 100px;
+}
+
 a, .btn-link {
     color: #0366d6;
 }

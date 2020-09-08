@@ -3,84 +3,106 @@
 @inject Cautionem.Data.BankService bankService
 @inject IStringLocalizer<Bank> Localizer
 
-<div>
-    <h1>@Localizer["banks"]</h1>
-    @{
-        <Table Narrow="true" Hoverable="true" Striped="false" ThemeContrast="ThemeContrast.Light">
-            <TableHeader>
-                <TableRow>
-                    <TableHeaderCell>@Localizer["bankname"]</TableHeaderCell>
-                    <TableHeaderCell>@Localizer["bankdescription"]</TableHeaderCell>
-                    <TableHeaderCell>@Localizer["bankaccount"]</TableHeaderCell>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                @foreach (Cautionem.Models.Bank bankloop in banks)
-                {
-                    <TableRow role="button" @onclick="@(() => BankEdit(bankloop))">
-                        <TableRowCell>@bankloop.Name</TableRowCell>
-                        <TableRowCell>@bankloop.Description</TableRowCell>
-                        <TableRowCell>@bankloop.Account</TableRowCell>
+    <div>
+        <h1>@Localizer["banks"]</h1>
+        @{
+            <Table Narrow="true" Hoverable="true" Striped="false" ThemeContrast="ThemeContrast.Light">
+                <TableHeader>
+                    <TableRow>
+                        <TableHeaderCell>@Localizer["bankname"]</TableHeaderCell>
+                        <TableHeaderCell>@Localizer["bankdescription"]</TableHeaderCell>
+                        <TableHeaderCell>@Localizer["bankaccount"]</TableHeaderCell>
                     </TableRow>
-                }
-            </TableBody>
-        </Table>
-    }
-</div>
-<div>
-    <div class="row">
-        <Addons>
-            <Addon AddonType="AddonType.Start">
-                <AddonLabel Style="width:100px">@Localizer["bankname"]</AddonLabel>
-            </Addon>
-            <Addon AddonType="AddonType.Body">
-                <TextEdit @bind-Value="@bank.Name" />
-            </Addon>
-        </Addons>
+                </TableHeader>
+                <TableBody>
+                    @foreach (Cautionem.Models.Bank bankloop in banks)
+                    {
+                        <TableRow role="button" @onclick="@(() => BankEdit(bankloop))">
+                            <TableRowCell>@bankloop.Name</TableRowCell>
+                            <TableRowCell>@bankloop.Description</TableRowCell>
+                            <TableRowCell>@bankloop.Account</TableRowCell>
+                        </TableRow>
+                    }
+                </TableBody>
+            </Table>
+        }
+        <Modal @ref="modalBank">
+            <ModalContent Size="ModalSize.Default">
+                <ModalBackdrop />
+                <ModalHeader>
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                    <ModalTitle>Edició de Banc</ModalTitle>
+                    <CloseButton Clicked="@CloseModal" />
+                </ModalHeader>
+                <ModalBody>
+                    <div>
+                        <Addons>
+                            <Addon AddonType="AddonType.Start">
+                                <AddonLabel Class="addonlabel_style">@Localizer["bankname"]</AddonLabel>
+                            </Addon>
+                            <Addon AddonType="AddonType.Body">
+                                <TextEdit @bind-Text="@bank.Name"/>
+                            </Addon>
+                        </Addons>
+                    </div>
+                    <div>
+                        <Addons>
+                            <Addon AddonType="AddonType.Start">
+                                <AddonLabel Class="addonlabel_style">@Localizer["bankdescription"]</AddonLabel>
+                            </Addon>
+                            <Addon AddonType="AddonType.Body">
+                                <input type="text" @bind="@bank.Description"/>
+                            </Addon>
+                        </Addons>
+                    </div>
+                    <div>
+                        <Addons>
+                            <Addon AddonType="AddonType.Start">
+                                <AddonLabel Class="addonlabel_style">@Localizer["bankaccount"]</AddonLabel>
+                            </Addon>
+                            <Addon AddonType="AddonType.Body">
+                                <input type="text" @bind="@bank.Account"/>
+                            </Addon>
+                        </Addons>
+                    </div>
+                </ModalBody>
+                <ModalFooter>
+                    <button class="btn btn_general btn-success" @onclick="Save">@SharedLocalizer["MSG_EDIT"]</button>
+                </ModalFooter>
+            </ModalContent>
+        </Modal>
     </div>
-    <div class="row">
-        <Addons>
-            <Addon AddonType="AddonType.Start">
-                <AddonLabel Style="width:100px">@Localizer["bankdescription"]</AddonLabel>
-            </Addon>
-            <Addon AddonType="AddonType.Body">
-                <TextEdit @bind-Value="@bank.Description" />
-            </Addon>
-        </Addons>
-    </div>
-    <div class="row">
-        <Addons>
-            <Addon AddonType="AddonType.Start">
-                <AddonLabel Style="width:100px">@Localizer["bankaccount"]</AddonLabel>
-            </Addon>
-            <Addon AddonType="AddonType.Body">
-                <TextEdit @bind-Value="@bank.Account" />
-            </Addon>
-        </Addons>
-    </div>
-</div>
-<br />
-<div class="d-flex justify-content-center">
-    <button class="btn btn_general btn-success" @onclick="Save">@SharedLocalizer["MSG_EDIT"]</button>
-</div>
 
+    @code{
+        private Cautionem.Models.Bank bank = new Cautionem.Models.Bank();
+        private IEnumerable<Cautionem.Models.Bank> banks = new List<Cautionem.Models.Bank>();
+        private Modal modalBank;
 
-@code{
-    private Cautionem.Models.Bank bank = new Cautionem.Models.Bank();
-    private IEnumerable<Cautionem.Models.Bank> banks = new List<Cautionem.Models.Bank>();
+        protected override async Task OnInitializedAsync()
+        {
+            this.banks = await bankService.GetAll(1);
+        }
 
-    protected override async Task OnInitializedAsync()
-    {
-        this.banks = await bankService.GetAll(1);
+        private void BankEdit(Cautionem.Models.Bank bank)
+        {
+            this.bank = bank;
+            modalBank.Show();
+        }
+
+        private async void Save()
+        {
+            await bankService.Save(this.bank);
+        }
+
+        // Modal
+
+        private void CloseModal()
+        {
+            modalBank.Hide();
+        }
+
+        private void OpenModal()
+        {
+            modalBank.Show();
+        }
     }
-
-    private void BankEdit(Cautionem.Models.Bank bank)
-    {
-        this.bank = bank;
-    }
-
-    private async void Save()
-    {
-        await bankService.Save(this.bank);
-    }
-}
