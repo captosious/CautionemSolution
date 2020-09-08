@@ -16,6 +16,8 @@ using Radzen;
 using Cautionem.Models;
 using Cautionem.Data;
 using Cautionem.Shared;
+using Blazorise;
+using Blazorise.Bootstrap;
 
 namespace Cautionem
 {
@@ -51,7 +53,13 @@ namespace Cautionem
             // Add LocalLanguages.
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-        }
+            //Blazorise
+            services.AddBlazorise(options =>
+            {
+                options.ChangeTextOnKeyPress = true; // optional
+            })
+                .AddBootstrapProviders();                                 
+            }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -86,6 +94,8 @@ namespace Cautionem
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.ApplicationServices.UseBootstrapProviders();
 
             app.UseEndpoints(endpoints =>
             {

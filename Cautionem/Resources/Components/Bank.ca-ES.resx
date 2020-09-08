@@ -18,7 +18,7 @@
     </data>
     
     <data name="bankname" xml:space="preserve">
-        <value>Nom Banc</value>
+        <value>Banc</value>
     </data>
     
     <data name="bankdescription" xml:space="preserve">
@@ -26,6 +26,6 @@
     </data>
     
     <data name="bankaccount" xml:space="preserve">
-        <value>Compte Bancari IBAN</value>
+        <value>IBAN</value>
     </data>
 </root>

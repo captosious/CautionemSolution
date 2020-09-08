@@ -18,7 +18,7 @@
     </data>
     
     <data name="paymenttypename" xml:space="preserve">
-        <value>Nom Banc</value>
+        <value>Tipus</value>
     </data>
     
     <data name="paymenttypeterms" xml:space="preserve">

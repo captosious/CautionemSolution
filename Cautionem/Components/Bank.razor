@@ -6,43 +6,64 @@
 <div>
     <h1>@Localizer["banks"]</h1>
     @{
-        <table class="table table-hover table-condensed table-list-general table-sm">
-            <thead>
-                <tr>
-                    <th>@Localizer["bankname"]</th>
-                    <th>@Localizer["bankdescription"]</th>
-                    <th>@Localizer["bankaccount"]</th>
-                </tr>
-            </thead>
-            <tbody>
+        <Table Narrow="true" Hoverable="true" Striped="false" ThemeContrast="ThemeContrast.Light">
+            <TableHeader>
+                <TableRow>
+                    <TableHeaderCell>@Localizer["bankname"]</TableHeaderCell>
+                    <TableHeaderCell>@Localizer["bankdescription"]</TableHeaderCell>
+                    <TableHeaderCell>@Localizer["bankaccount"]</TableHeaderCell>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
                 @foreach (Cautionem.Models.Bank bankloop in banks)
                 {
-                    <tr class="" role="button" @onclick="@(() => BankEdit(bankloop))">
-                        <td>@bankloop.Name</td>
-                        <td>@bankloop.Description</td>
-                        <td>@bankloop.Account</td>
-                    </tr>
+                    <TableRow role="button" @onclick="@(() => BankEdit(bankloop))">
+                        <TableRowCell>@bankloop.Name</TableRowCell>
+                        <TableRowCell>@bankloop.Description</TableRowCell>
+                        <TableRowCell>@bankloop.Account</TableRowCell>
+                    </TableRow>
                 }
-            </tbody>
-        </table>
+            </TableBody>
+        </Table>
     }
 </div>
 <div>
     <div class="row">
-        <div class="col-4">@Localizer["bankname"]</div>
-        <div class="col-8"><input type="text" @bind="@bank.Name" /></div>
+        <Addons>
+            <Addon AddonType="AddonType.Start">
+                <AddonLabel Style="width:100px">@Localizer["bankname"]</AddonLabel>
+            </Addon>
+            <Addon AddonType="AddonType.Body">
+                <TextEdit @bind-Value="@bank.Name" />
+            </Addon>
+        </Addons>
     </div>
     <div class="row">
-        <div class="col-4">@Localizer["bankdescription"]</div>
-        <div class="col-8"><input type="text" @bind="@bank.Description" /></div>
+        <Addons>
+            <Addon AddonType="AddonType.Start">
+                <AddonLabel Style="width:100px">@Localizer["bankdescription"]</AddonLabel>
+            </Addon>
+            <Addon AddonType="AddonType.Body">
+                <TextEdit @bind-Value="@bank.Description" />
+            </Addon>
+        </Addons>
     </div>
     <div class="row">
-        <div class="col-4">@Localizer["bankaccount"]</div>
-        <div class="col-8"><input type="text" @bind="@bank.Account" /></div>
+        <Addons>
+            <Addon AddonType="AddonType.Start">
+                <AddonLabel Style="width:100px">@Localizer["bankaccount"]</AddonLabel>
+            </Addon>
+            <Addon AddonType="AddonType.Body">
+                <TextEdit @bind-Value="@bank.Account" />
+            </Addon>
+        </Addons>
     </div>
 </div>
+<br />
+<div class="d-flex justify-content-center">
+    <button class="btn btn_general btn-success" @onclick="Save">@SharedLocalizer["MSG_EDIT"]</button>
+</div>
 
-<button class="btn btn_general btn-success" @onclick="Save">@SharedLocalizer["MSG_EDIT"]</button>
 
 @code{
     private Cautionem.Models.Bank bank = new Cautionem.Models.Bank();
