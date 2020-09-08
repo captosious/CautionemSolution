@@ -46,5 +46,89 @@ namespace Cautionem.Resources.Shared {
                 resourceCulture = value;
             }
         }
+        
+        internal static string MSG_OK {
+            get {
+                return ResourceManager.GetString("MSG_OK", resourceCulture);
+            }
+        }
+        
+        internal static string MSG_CANCEL {
+            get {
+                return ResourceManager.GetString("MSG_CANCEL", resourceCulture);
+            }
+        }
+        
+        internal static string MSG_DELETE {
+            get {
+                return ResourceManager.GetString("MSG_DELETE", resourceCulture);
+            }
+        }
+        
+        internal static string MSG_EDIT {
+            get {
+                return ResourceManager.GetString("MSG_EDIT", resourceCulture);
+            }
+        }
+        
+        internal static string MSG_ADD {
+            get {
+                return ResourceManager.GetString("MSG_ADD", resourceCulture);
+            }
+        }
+        
+        internal static string MSG_SAVE {
+            get {
+                return ResourceManager.GetString("MSG_SAVE", resourceCulture);
+            }
+        }
+        
+        internal static string OP_OK_TITLE {
+            get {
+                return ResourceManager.GetString("OP_OK_TITLE", resourceCulture);
+            }
+        }
+        
+        internal static string OP_OK {
+            get {
+                return ResourceManager.GetString("OP_OK", resourceCulture);
+            }
+        }
+        
+        internal static string OP_FAIL_TITLE {
+            get {
+                return ResourceManager.GetString("OP_FAIL_TITLE", resourceCulture);
+            }
+        }
+        
+        internal static string OP_FAIL {
+            get {
+                return ResourceManager.GetString("OP_FAIL", resourceCulture);
+            }
+        }
+        
+        internal static string OP_WARNING_TITLE {
+            get {
+                return ResourceManager.GetString("OP_WARNING_TITLE", resourceCulture);
+            }
+        }
+        
+        internal static string OP_WARNING {
+            get {
+                return ResourceManager.GetString("OP_WARNING", resourceCulture);
+            }
+        }
+        
+        internal static string OP_PROCESS_RUNNING {
+            get {
+                return ResourceManager.GetString("OP_PROCESS_RUNNING", resourceCulture);
+            }
+        }
+        
+        internal static string ADDRESS_WRONG {
+            get {
+                return ResourceManager.GetString("ADDRESS_WRONG", resourceCulture);
+            }
+        }
     }
 }

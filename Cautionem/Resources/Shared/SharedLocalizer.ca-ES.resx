@@ -12,4 +12,65 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    
+    <!-- Buttons -->
+    
+    <data name="MSG_OK" xml:space="preserve">
+        <value>Acceptar</value>
+    </data>
+    
+    <data name="MSG_CANCEL" xml:space="preserve">
+        <value>Cancel·lar</value>
+    </data>
+    
+    <data name="MSG_DELETE" xml:space="preserve">
+        <value>Esborrar</value>
+    </data>
+    
+    <data name="MSG_EDIT" xml:space="preserve">
+        <value>Editar</value>
+    </data>
+    
+    <data name="MSG_ADD" xml:space="preserve">
+        <value>Afegir</value>
+    </data>
+    
+    <data name="MSG_SAVE" xml:space="preserve">
+        <value>Grabar</value>
+    </data>
+    
+    <!-- DataBase/Operations Messages -->
+    
+    <data name="OP_OK_TITLE" xml:space="preserve">
+        <value>Correcte</value>
+    </data>
+    
+    <data name="OP_OK" xml:space="preserve">
+        <value>Dades gravades correctament.</value>
+    </data>
+    
+    <data name="OP_FAIL_TITLE" xml:space="preserve">
+        <value>Error</value>
+    </data>
+    
+    <data name="OP_FAIL" xml:space="preserve">
+        <value>Hi ha hagut un error.</value>
+    </data>
+    
+    <data name="OP_WARNING_TITLE" xml:space="preserve">
+        <value>Atenció</value>
+    </data>
+    
+    <data name="OP_WARNING" xml:space="preserve">
+        <value>La transacció té errors.</value>
+    </data>
+    
+    <data name="OP_PROCESS_RUNNING" xml:space="preserve">
+        <value>Processant la petició. Sisplau, esperi.</value>
+    </data>
+    
+    <!-- Errades de redirecció de pàgina -->
+    <data name="ADDRESS_WRONG" xml:space="preserve">
+        <value>Ens sap greu, però no hi ha res en aquesta pàgina.</value>
+    </data>
 </root>
