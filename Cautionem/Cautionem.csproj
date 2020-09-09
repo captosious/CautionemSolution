@@ -21,7 +21,7 @@
     </PackageReference>
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.21" />
     <PackageReference Include="MySql.Data" Version="8.0.21" />
-    <PackageReference Include="Radzen.Blazor" Version="2.11.18" />
+    <PackageReference Include="Radzen.Blazor" Version="2.11.19" />
     <PackageReference Include="Blazorise.Bootstrap" Version="0.9.1.2" />
   </ItemGroup>
   <ItemGroup>

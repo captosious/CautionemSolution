@@ -37,6 +37,7 @@ namespace Cautionem
             services.AddDbContext<CautionemContext>(options =>
             {
                 options.UseMySQL(Configuration.GetConnectionString("MySQLConnectionString"));
+                options.EnableSensitiveDataLogging(false);
             }
             );
             services.AddRazorPages();

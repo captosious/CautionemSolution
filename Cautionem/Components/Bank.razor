@@ -1,5 +1,8 @@
 ﻿@page "/Bank"
 @using Cautionem.Models
+@using Blazorise
+@using System.ComponentModel
+
 @inject Cautionem.Data.BankService bankService
 @inject IStringLocalizer<Bank> Localizer
 
@@ -26,11 +29,11 @@
                 </TableBody>
             </Table>
         }
-        <Modal @ref="modalBank">
-            <ModalContent Size="ModalSize.Default">
-                <ModalBackdrop />
+        <Modal @ref="modalBank" Closing="@OnClosing">
+            <ModalContent Size="ModalSize.Default" Centered="true">
+                <ModalBackdrop Attributes="" />
                 <ModalHeader>
-                    <i class="fas fa-home" aria-hidden="true"></i>
+                    <i class="fas fa-pencil-square-o" aria-hidden="true"></i>
                     <ModalTitle>Edició de Banc</ModalTitle>
                     <CloseButton Clicked="@CloseModal" />
                 </ModalHeader>
@@ -41,7 +44,7 @@
                                 <AddonLabel Class="addonlabel_style">@Localizer["bankname"]</AddonLabel>
                             </Addon>
                             <Addon AddonType="AddonType.Body">
-                                <TextEdit @bind-Text="@bank.Name"/>
+                                <TextEdit @bind-Text="@bankEdit.Name"/>
                             </Addon>
                         </Addons>
                     </div>
@@ -51,7 +54,7 @@
                                 <AddonLabel Class="addonlabel_style">@Localizer["bankdescription"]</AddonLabel>
                             </Addon>
                             <Addon AddonType="AddonType.Body">
-                                <input type="text" @bind="@bank.Description"/>
+                                <TextEdit @bind-Text="@bankEdit.Description" />
                             </Addon>
                         </Addons>
                     </div>
@@ -61,7 +64,7 @@
                                 <AddonLabel Class="addonlabel_style">@Localizer["bankaccount"]</AddonLabel>
                             </Addon>
                             <Addon AddonType="AddonType.Body">
-                                <input type="text" @bind="@bank.Account"/>
+                                <TextEdit @bind-Text="@bankEdit.Account" />
                             </Addon>
                         </Addons>
                     </div>
@@ -74,35 +77,47 @@
     </div>
 
     @code{
-        private Cautionem.Models.Bank bank = new Cautionem.Models.Bank();
+        private Cautionem.Models.Bank bankEdit = new Cautionem.Models.Bank();
         private IEnumerable<Cautionem.Models.Bank> banks = new List<Cautionem.Models.Bank>();
         private Modal modalBank;
 
         protected override async Task OnInitializedAsync()
+        {
+            await GetAllRecords();
+        }
+
+        private async Task GetAllRecords()
         {
             this.banks = await bankService.GetAll(1);
         }
 
         private void BankEdit(Cautionem.Models.Bank bank)
         {
-            this.bank = bank;
+            this.bankEdit = bank;
             modalBank.Show();
         }
 
         private async void Save()
         {
-            await bankService.Save(this.bank);
+            await bankService.Save(bankEdit);
+            modalBank.Hide();
         }
 
         // Modal
 
         private void CloseModal()
         {
+            bankService.Detach(bankEdit);
             modalBank.Hide();
         }
 
         private void OpenModal()
         {
             modalBank.Show();
+        }
+
+        private void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = false;
         }
     }
