@@ -47,6 +47,12 @@ namespace Cautionem.Resources.Components {
             }
         }
         
+        internal static string banksedition {
+            get {
+                return ResourceManager.GetString("banksedition", resourceCulture);
+            }
+        }
+        
         internal static string banks {
             get {
                 return ResourceManager.GetString("banks", resourceCulture);

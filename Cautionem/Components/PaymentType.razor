@@ -4,57 +4,65 @@
 @inject IStringLocalizer<PaymentType> Localizer
 
 <div>
-    <h1>@Localizer["paymenttypes"]</h1>
-        <Table Narrow="true" Hoverable="true" Striped="false" ThemeContrast="ThemeContrast.Light">
-            <TableHeader>
-                <TableRow>
-                    <TableHeaderCell>@Localizer["paymenttypename"]</TableHeaderCell>
-                    <TableHeaderCell>@Localizer["paymenttypeterms"]</TableHeaderCell>
+    <h2>@Localizer["paymenttypes"]</h2>
+    <Table Narrow="true" Hoverable="true">
+        <TableHeader Class="tableselection_style">
+            <TableRow>
+                <TableHeaderCell>@Localizer["paymenttypename"]</TableHeaderCell>
+                <TableHeaderCell>@Localizer["paymenttypeterms"]</TableHeaderCell>
+            </TableRow>
+        </TableHeader>
+        <TableBody>
+            @foreach (Cautionem.Models.PaymentType paymentTypeloop in paymentTypes)
+            {
+                <TableRow role="button" @onclick="@(() => PaymentEdit(paymentTypeloop))">
+                    <TableRowCell>@paymentTypeloop.Name</TableRowCell>
+                    <TableRowCell>@paymentTypeloop.Terms</TableRowCell>
                 </TableRow>
-            </TableHeader>
-            <TableBody>
-                @foreach (Cautionem.Models.PaymentType paymentTypeloop in paymentTypes)
-                {
-                    <TableRow role="button" @onclick="@(() => PaymentEdit(paymentTypeloop))">
-                        <TableRowCell>@paymentTypeloop.Name</TableRowCell>
-                        <TableRowCell>@paymentTypeloop.Terms</TableRowCell>
-                    </TableRow>
-                }
-            </TableBody>
-        </Table>
+            }
+        </TableBody>
+    </Table>
 </div>
 <div>
-    <div class="row">
-        <Addons>
-            <Addon AddonType="AddonType.Start">
-                <AddonLabel Style="width:100px">@Localizer["paymenttypename"]</AddonLabel>
-            </Addon>
-            <Addon AddonType="AddonType.Body">
-                <TextEdit @bind-Text="@paymentType.Name" />
+    <Modal @ref="modalPaymentType" Closing="@OnClosing">
+        <ModalBackdrop />
+        <ModalContent Size="ModalSize.Default" Centered="true">
+            <ModalHeader>
+                <i class="fas fa-edit fa-2x"></i>
+                <ModalTitle>@Localizer["paymenttypesedition"]</ModalTitle>
+                <CloseButton Clicked="@CloseModal" />
+            </ModalHeader>
+            <ModalBody>
+                <Addons>
+                    <Addon AddonType="AddonType.Start">
+                        <AddonLabel Style="width:100px">@Localizer["paymenttypename"]</AddonLabel>
+                    </Addon>
+                    <Addon AddonType="AddonType.Body">
+                        <TextEdit @bind-Text="@paymentType.Name" />
 
-            </Addon>
-        </Addons>
-    </div>
-    <div class="row">
-        <Addons>
-            <Addon AddonType="AddonType.Start">
-                <AddonLabel Style="width:100px">@Localizer["paymenttypeterms"]</AddonLabel>
-            </Addon>
-            <Addon AddonType="AddonType.Body">
-                <TextEdit @bind-Text="@paymentType.Terms" />
-            </Addon>
-        </Addons>
-    </div>
+                    </Addon>
+                </Addons>
+                <Addons>
+                    <Addon AddonType="AddonType.Start">
+                        <AddonLabel Style="width:100px">@Localizer["paymenttypeterms"]</AddonLabel>
+                    </Addon>
+                    <Addon AddonType="AddonType.Body">
+                        <TextEdit @bind-Text="@paymentType.Terms" />
+                    </Addon>
+                </Addons>
+            </ModalBody>
+            <ModalFooter>
+                <button class="btn btn_general btn-success" @onclick="Save">@SharedLocalizer["MSG_EDIT"]</button>
+            </ModalFooter>
+        </ModalContent>
+    </Modal>
 </div>
-<br />
-<div class="d-flex justify-content-center">
-    <button class="btn btn_general btn-success" @onclick="Save">@SharedLocalizer["MSG_EDIT"]</button>
-</div>
-
 
 @code{
     private Cautionem.Models.PaymentType paymentType = new Cautionem.Models.PaymentType();
     private IEnumerable<Cautionem.Models.PaymentType> paymentTypes = new List<Cautionem.Models.PaymentType>();
+    //Modal
+    private Modal modalPaymentType;
 
     protected override async Task OnInitializedAsync()
     {
@@ -64,10 +72,30 @@
     private void PaymentEdit(Cautionem.Models.PaymentType paymentType)
     {
         this.paymentType = paymentType;
+        modalPaymentType.Show();
     }
 
     private async void Save()
     {
         await paymentTypeService.Save(this.paymentType);
+        CloseModal();
+    }
+
+    // Modal
+    private void CloseModal()
+    {
+        modalPaymentType.Hide();
+    }
+
+    private void OpenModal()
+    {
+        modalPaymentType.Show();
+    }
+
+    private void OnClosing(CancelEventArgs e)
+    {
+        paymentTypeService.Detach(paymentType);
+        e.Cancel = false;
+        StateHasChanged();
     }
 }

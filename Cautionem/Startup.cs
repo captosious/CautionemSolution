@@ -57,7 +57,7 @@ namespace Cautionem
             //Blazorise
             services.AddBlazorise(options =>
             {
-                options.ChangeTextOnKeyPress = true; // optional
+                options.ChangeTextOnKeyPress = false; // optional
             })
                 .AddBootstrapProviders();                                 
             }

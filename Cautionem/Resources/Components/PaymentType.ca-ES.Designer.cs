@@ -47,6 +47,12 @@ namespace Cautionem.Resources.Components {
             }
         }
         
+        internal static string paymenttypesedition {
+            get {
+                return ResourceManager.GetString("paymenttypesedition", resourceCulture);
+            }
+        }
+        
         internal static string paymenttypes {
             get {
                 return ResourceManager.GetString("paymenttypes", resourceCulture);

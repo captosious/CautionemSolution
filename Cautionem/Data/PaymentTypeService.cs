@@ -35,5 +35,9 @@ namespace Cautionem.Data
             await cautionemContext.SaveChangesAsync();
         }
 
+        public void Detach(PaymentType paymentType)
+        {
+            cautionemContext.Entry(paymentType).CurrentValues.SetValues(cautionemContext.Entry(paymentType).OriginalValues);
+        }
     }
 }

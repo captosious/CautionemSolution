@@ -2,6 +2,9 @@ html, body {
     font-family: 'Barlow';
 }
 
+.tableselection_style {
+    style ="background-color:lightgrey"
+}
 .column_style {
     margin: 5px;
 }

@@ -13,6 +13,10 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     
+    <data name="paymenttypesedition" xml:space="preserve">
+        <value>Edició de Tipus de Pagament</value>
+    </data>
+    
     <data name="paymenttypes" xml:space="preserve">
         <value>Tipus de pagament</value>
     </data>

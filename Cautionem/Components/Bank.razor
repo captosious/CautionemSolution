@@ -1,16 +1,15 @@
 ﻿@page "/Bank"
 @using Cautionem.Models
 @using Blazorise
-@using System.ComponentModel
 
 @inject Cautionem.Data.BankService bankService
 @inject IStringLocalizer<Bank> Localizer
 
     <div>
-        <h1>@Localizer["banks"]</h1>
+        <h2>@Localizer["banks"]</h2>
         @{
-            <Table Narrow="true" Hoverable="true" Striped="false" ThemeContrast="ThemeContrast.Light">
-                <TableHeader>
+            <Table Narrow="true" Hoverable="true">
+                <TableHeader Class="tableselection_style">
                     <TableRow>
                         <TableHeaderCell>@Localizer["bankname"]</TableHeaderCell>
                         <TableHeaderCell>@Localizer["bankdescription"]</TableHeaderCell>
@@ -29,56 +28,57 @@
                 </TableBody>
             </Table>
         }
-        <Modal @ref="modalBank" Closing="@OnClosing">
-            <ModalContent Size="ModalSize.Default" Centered="true">
-                <ModalBackdrop Attributes="" />
-                <ModalHeader>
-                    <i class="fas fa-pencil-square-o" aria-hidden="true"></i>
-                    <ModalTitle>Edició de Banc</ModalTitle>
-                    <CloseButton Clicked="@CloseModal" />
-                </ModalHeader>
-                <ModalBody>
-                    <div>
-                        <Addons>
-                            <Addon AddonType="AddonType.Start">
-                                <AddonLabel Class="addonlabel_style">@Localizer["bankname"]</AddonLabel>
-                            </Addon>
-                            <Addon AddonType="AddonType.Body">
-                                <TextEdit @bind-Text="@bankEdit.Name"/>
-                            </Addon>
-                        </Addons>
-                    </div>
-                    <div>
-                        <Addons>
-                            <Addon AddonType="AddonType.Start">
-                                <AddonLabel Class="addonlabel_style">@Localizer["bankdescription"]</AddonLabel>
-                            </Addon>
-                            <Addon AddonType="AddonType.Body">
-                                <TextEdit @bind-Text="@bankEdit.Description" />
-                            </Addon>
-                        </Addons>
-                    </div>
-                    <div>
-                        <Addons>
-                            <Addon AddonType="AddonType.Start">
-                                <AddonLabel Class="addonlabel_style">@Localizer["bankaccount"]</AddonLabel>
-                            </Addon>
-                            <Addon AddonType="AddonType.Body">
-                                <TextEdit @bind-Text="@bankEdit.Account" />
-                            </Addon>
-                        </Addons>
-                    </div>
-                </ModalBody>
-                <ModalFooter>
-                    <button class="btn btn_general btn-success" @onclick="Save">@SharedLocalizer["MSG_EDIT"]</button>
-                </ModalFooter>
-            </ModalContent>
-        </Modal>
+    <Modal @ref="modalBank" Closing="@OnClosing">
+        <ModalBackdrop />
+        <ModalContent Size="ModalSize.Default" Centered="true">
+            <ModalHeader>
+                <i class="fas fa-edit fa-2x"></i>
+                <ModalTitle>@Localizer["banksedition"]</ModalTitle>
+                <CloseButton Clicked="@CloseModal" />
+            </ModalHeader>
+            <ModalBody>
+                <div>
+                    <Addons>
+                        <Addon AddonType="AddonType.Start">
+                            <AddonLabel Class="addonlabel_style">@Localizer["bankname"]</AddonLabel>
+                        </Addon>
+                        <Addon AddonType="AddonType.Body">
+                            <TextEdit @bind-Text="@bankEdit.Name" />
+                        </Addon>
+                    </Addons>
+                </div>
+                <div>
+                    <Addons>
+                        <Addon AddonType="AddonType.Start">
+                            <AddonLabel Class="addonlabel_style">@Localizer["bankdescription"]</AddonLabel>
+                        </Addon>
+                        <Addon AddonType="AddonType.Body">
+                            <TextEdit @bind-Text="@bankEdit.Description" />
+                        </Addon>
+                    </Addons>
+                </div>
+                <div>
+                    <Addons>
+                        <Addon AddonType="AddonType.Start">
+                            <AddonLabel Class="addonlabel_style">@Localizer["bankaccount"]</AddonLabel>
+                        </Addon>
+                        <Addon AddonType="AddonType.Body">
+                            <TextEdit @bind-Text="@bankEdit.Account" />
+                        </Addon>
+                    </Addons>
+                </div>
+            </ModalBody>
+            <ModalFooter>
+                <button class="btn btn_general btn-success" @onclick="Save">@SharedLocalizer["MSG_EDIT"]</button>
+            </ModalFooter>
+        </ModalContent>
+    </Modal>
     </div>
 
     @code{
         private Cautionem.Models.Bank bankEdit = new Cautionem.Models.Bank();
         private IEnumerable<Cautionem.Models.Bank> banks = new List<Cautionem.Models.Bank>();
+        //Modal
         private Modal modalBank;
 
         protected override async Task OnInitializedAsync()
@@ -100,14 +100,12 @@
         private async void Save()
         {
             await bankService.Save(bankEdit);
-            modalBank.Hide();
+            CloseModal();
         }
 
         // Modal
-
         private void CloseModal()
         {
-            bankService.Detach(bankEdit);
             modalBank.Hide();
         }
 
@@ -118,6 +116,8 @@
 
         private void OnClosing(CancelEventArgs e)
         {
+            bankService.Detach(bankEdit);
             e.Cancel = false;
+            StateHasChanged();
         }
     }
