@@ -4,69 +4,57 @@
 @inject DialogService dialogService
 @inject Cautionem.Data.CompanyService companyService
 @inject IStringLocalizer<Company> Localizer
-
+ 
 <div>
-    <h1>@Localizer["Empresa"]</h1>
-    <div class="row">
+    <h2>@Localizer["Empresa"]</h2>
         <Addons>
             <Addon AddonType="AddonType.Start">
-                <AddonLabel Style="width:100px">@Localizer["Empresa"]</AddonLabel>
+                <AddonLabel class="labelstyle_form">@Localizer["Empresa"]</AddonLabel>
             </Addon>
             <Addon AddonType="AddonType.Body">
                 <TextEdit @bind-Text="@company.Name"/>
             </Addon>
         </Addons>
-    </div>
-    <div class="row">
         <Addons>
             <Addon AddonType="AddonType.Start">
-                <AddonLabel Style="width:100px">@Localizer["NIF"]</AddonLabel>
+                <AddonLabel class="labelstyle_form">@Localizer["NIF"]</AddonLabel>
             </Addon>
             <Addon AddonType="AddonType.Body">
                 <TextEdit @bind-Text="@company.FiscalId" />
             </Addon>
         </Addons>
-    </div>
-    <div class="row">
         <Addons>
             <Addon AddonType="AddonType.Start">
-                <AddonLabel Style="width:100px">@Localizer["Address"]</AddonLabel>
+                <AddonLabel class="labelstyle_form">@Localizer["Address"]</AddonLabel>
             </Addon>
             <Addon AddonType="AddonType.Body">
                 <TextEdit @bind-Text="@company.Address" />
             </Addon>
         </Addons>
-    </div>
-    <div class="row">
         <Addons>
             <Addon AddonType="AddonType.Start">
-                <AddonLabel Style="width:100px">@Localizer["Town"]</AddonLabel>
+                <AddonLabel class="labelstyle_form">@Localizer["Town"]</AddonLabel>
             </Addon>
             <Addon AddonType="AddonType.Body">
                 <TextEdit @bind-Text="@company.City"/>
             </Addon>
         </Addons>
-    </div>
-    <div class="row">
         <Addons>
             <Addon AddonType="AddonType.Start">
-                <AddonLabel Style="width:100px">@Localizer["zip"]</AddonLabel>
+                <AddonLabel class="labelstyle_form">@Localizer["zip"]</AddonLabel>
             </Addon>
             <Addon AddonType="AddonType.Body">
                 <TextEdit @bind-Text="@company.ZipCode" />
             </Addon>
         </Addons>
-    </div>
-    <div class="row">
         <Addons>
             <Addon AddonType="AddonType.Start">
-                <AddonLabel Style="width:100px">@Localizer["Email"]</AddonLabel>
+                <AddonLabel class="labelstyle_form">@Localizer["Email"]</AddonLabel>
             </Addon>
             <Addon AddonType="AddonType.Body">
                 <TextEdit @bind-Text="@company.Email" />
             </Addon>
         </Addons>
-    </div>
     <br />
     <div class="d-flex justify-content-center">
         <button class="btn btn_general btn-success" @onclick="SaveCompany">@SharedLocalizer["MSG_SAVE"]</button>
@@ -84,6 +72,8 @@
 
     private async void SaveCompany()
     {
+        myBlocker.Show();
         await companyService.Save(company);
+        myBlocker.Hide();
     }
 }

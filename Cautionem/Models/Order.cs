@@ -11,6 +11,5 @@ namespace Cautionem.Models
         public int CustomerId { get; set; }
 
         public virtual Company Company { get; set; }
-        public virtual Customer Customer { get; set; }
     }
 }

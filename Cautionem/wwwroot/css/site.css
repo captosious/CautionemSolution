@@ -2,8 +2,12 @@ html, body {
     font-family: 'Barlow';
 }
 
+.labelstyle_form {
+    width: 120px;
+}
+
 .tableselection_style {
-    style ="background-color:lightgrey"
+    background-color:lightgrey;
 }
 .column_style {
     margin: 5px;

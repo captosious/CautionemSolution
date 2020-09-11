@@ -7,7 +7,7 @@ namespace Cautionem.Models
     {
         public Customer()
         {
-            Order = new HashSet<Order>();
+            CustomerAddress = new HashSet<CustomerAddress>();
         }
 
         public int CompanyId { get; set; }
@@ -16,6 +16,6 @@ namespace Cautionem.Models
         public string TaxId { get; set; }
 
         public virtual Company Company { get; set; }
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<CustomerAddress> CustomerAddress { get; set; }
     }
 }

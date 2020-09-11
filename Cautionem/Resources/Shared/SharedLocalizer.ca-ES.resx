@@ -36,7 +36,7 @@
     </data>
     
     <data name="MSG_SAVE" xml:space="preserve">
-        <value>Grabar</value>
+        <value>Gravar</value>
     </data>
     
     <!-- DataBase/Operations Messages -->
@@ -72,5 +72,14 @@
     <!-- Errades de redirecció de pàgina -->
     <data name="ADDRESS_WRONG" xml:space="preserve">
         <value>Ens sap greu, però no hi ha res en aquesta pàgina.</value>
+    </data>
+    
+    <!-- Errades de redirecció de pàgina -->
+    <data name="home" xml:space="preserve">
+        <value>Inici</value>
+    </data>
+    
+    <data name="setup" xml:space="preserve">
+        <value>Configuració</value>
     </data>
 </root>

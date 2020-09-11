@@ -13,6 +13,7 @@
     <Folder Include="Resources\Models\" />
     <Folder Include="Resources\Shared\" />
     <Folder Include="Resources\Components\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8">
@@ -21,7 +22,7 @@
     </PackageReference>
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.21" />
     <PackageReference Include="MySql.Data" Version="8.0.21" />
-    <PackageReference Include="Radzen.Blazor" Version="2.11.19" />
+    <PackageReference Include="Radzen.Blazor" Version="2.12.0" />
     <PackageReference Include="Blazorise.Bootstrap" Version="0.9.1.2" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +66,22 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CompanySetup.ca-ES.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Components\Company.ca-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Company.ca-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Components\Company.es-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Company.es-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Components\Customer.es-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Customer.es-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Components\Customer.ca-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Customer.ca-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\Pages\Company.es-ES.Designer.cs">
@@ -103,8 +120,17 @@
     <Compile Update="Resources\Pages\CompanySetup.ca-ES.Designer.cs">
       <DependentUpon>CompanySetup.ca-ES.resx</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Properties\PublishProfiles\FolderProfile 1.pubxml" />
+    <Compile Update="Resources\Components\Company.ca-ES.Designer.cs">
+      <DependentUpon>Company.ca-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Components\Company.es-ES.Designer.cs">
+      <DependentUpon>Company.es-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Components\Customer.es-ES.Designer.cs">
+      <DependentUpon>Customer.es-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Components\Customer.ca-ES.Designer.cs">
+      <DependentUpon>Customer.ca-ES.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

@@ -29,6 +29,12 @@ namespace Cautionem.Data
             return await Task.FromResult((PaymentType)cautionemContext.PaymentType.FirstOrDefault(x => x.CompanyId == companyId));
         }
 
+        public async Task Add(PaymentType paymentType)
+        {
+            await cautionemContext.AddAsync(paymentType);
+            await cautionemContext.SaveChangesAsync();
+        }
+
         public async Task Save(PaymentType paymentType)
         {
             cautionemContext.PaymentType.Update(paymentType);

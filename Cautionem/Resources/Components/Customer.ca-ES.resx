@@ -15,23 +15,13 @@
     
     <!-- messages -->
     
-    <data name="banksedition" xml:space="preserve">
-        <value>Edició de Banc</value>
+    <data name="customers" xml:space="preserve">
+        <value>Clients</value>
     </data>
     
-    <data name="banks" xml:space="preserve">
-        <value>Bancs</value>
+    <data name="customeredit" xml:space="preserve">
+        <value>Edició de Client</value>
     </data>
     
-    <data name="bankname" xml:space="preserve">
-        <value>Banc</value>
-    </data>
     
-    <data name="bankdescription" xml:space="preserve">
-        <value>Detall</value>
-    </data>
-    
-    <data name="bankaccount" xml:space="preserve">
-        <value>IBAN</value>
-    </data>
 </root>

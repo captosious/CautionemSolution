@@ -130,5 +130,17 @@ namespace Cautionem.Resources.Shared {
                 return ResourceManager.GetString("ADDRESS_WRONG", resourceCulture);
             }
         }
+        
+        internal static string home {
+            get {
+                return ResourceManager.GetString("home", resourceCulture);
+            }
+        }
+        
+        internal static string setup {
+            get {
+                return ResourceManager.GetString("setup", resourceCulture);
+            }
+        }
     }
 }

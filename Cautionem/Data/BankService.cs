@@ -30,6 +30,12 @@ namespace Cautionem.Data
             return await Task.FromResult((Bank)cautionemContext.Bank.FirstOrDefault(x => x.CompanyId == companyId));
         }
 
+        public async Task Add(Bank bank)
+        {
+            await cautionemContext.AddAsync(bank);
+            await cautionemContext.SaveChangesAsync();
+        }
+
         public async Task Save(Bank bank)
         {
             cautionemContext.Entry(bank).State=Microsoft.EntityFrameworkCore.EntityState.Modified;

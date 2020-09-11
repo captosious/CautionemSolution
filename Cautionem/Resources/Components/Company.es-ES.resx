@@ -15,23 +15,27 @@
     
     <!-- messages -->
     
-    <data name="banksedition" xml:space="preserve">
-        <value>Edició de Banc</value>
+    <data name="Empresa" xml:space="preserve">
+        <value>Empresa</value>
     </data>
     
-    <data name="banks" xml:space="preserve">
-        <value>Bancs</value>
+    <data name="NIF" xml:space="preserve">
+        <value>NIF</value>
     </data>
     
-    <data name="bankname" xml:space="preserve">
-        <value>Banc</value>
+    <data name="Address" xml:space="preserve">
+        <value>Dirección</value>
     </data>
     
-    <data name="bankdescription" xml:space="preserve">
-        <value>Detall</value>
+    <data name="Town" xml:space="preserve">
+        <value>Ciudad</value>
     </data>
     
-    <data name="bankaccount" xml:space="preserve">
-        <value>IBAN</value>
+    <data name="zip" xml:space="preserve">
+        <value>Código Postal</value>
+    </data>
+    
+    <data name="Email" xml:space="preserve">
+        <value>eCorreo</value>
     </data>
 </root>

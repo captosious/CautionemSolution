@@ -53,7 +53,7 @@ namespace Cautionem
             services.AddScoped<PaymentTypeService>();
             // Add LocalLanguages.
             services.AddLocalization(options => options.ResourcesPath = "Resources");
-
+            services.AddScoped<MyBlocker>();
             //Blazorise
             services.AddBlazorise(options =>
             {
