@@ -1,0 +1,56 @@
+﻿@page "/Customer"
+@using Cautionem.Models
+@using Blazorise
+
+@inject Cautionem.Data.CustomerService customerService
+@inject IStringLocalizer<Customer> Localizer
+
+<div>
+    <h2>@Localizer["customers"]</h2>
+    <Table Narrow="true" Hoverable="true">
+        <TableHeader Class="tableselection_style">
+            <TableRow>
+                <TableHeaderCell>@Localizer["paymenttypename"]</TableHeaderCell>
+                <TableHeaderCell>@Localizer["paymenttypeterms"]</TableHeaderCell>
+            </TableRow>
+        </TableHeader>
+        <TableBody>
+            @foreach (Cautionem.Models.Customer customer in customers)
+            {
+                <TableRow role="button" @onclick="@(() => CustomerEdit(customer))">
+                    <TableRowCell>@customer.Name</TableRowCell>
+                    <TableRowCell>@customer.CustomerId</TableRowCell>
+                </TableRow>
+            }
+        </TableBody>
+    </Table>
+</div>
+
+
+@code {
+
+    private Cautionem.Models.Customer customerEdit { get; set; }
+    private IEnumerable<Cautionem.Models.Customer> customers = new List<Cautionem.Models.Customer>();
+
+    //Modal
+    private Modal modalCustomer;
+    private bool IsNew = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        customers = await customerService.GetAll(1);
+    }
+
+    private void CustomerEdit(Cautionem.Models.Customer customer)
+    {
+        this.customerEdit = customer;
+        modalCustomer.Show();
+    }
+
+    private async void SaveCustomer()
+    {
+        myBlocker.Show();
+        await customerService.Save(customerEdit);
+        myBlocker.Hide();
+    }
+}
