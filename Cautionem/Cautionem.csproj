@@ -14,6 +14,7 @@
     <Folder Include="Resources\Shared\" />
     <Folder Include="Resources\Components\" />
     <Folder Include="wwwroot\js\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8">

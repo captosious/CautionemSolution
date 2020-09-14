@@ -2,7 +2,6 @@
 @using Cautionem.Models
 @using Cautionem.Components
 
-
 @inject DialogService dialogService
 @inject Cautionem.Data.CompanyService companyService
 @inject IStringLocalizer<CompanySetup> Localizer
@@ -17,3 +16,16 @@
             <div class="col column_style"></div>
         </div>
     </div>
+
+@code
+{
+    protected override async Task OnInitializedAsync()
+    {
+        myBlocker.Show();
+    }
+
+    protected void OnAfterRender()
+    {
+        myBlocker.Hide();
+    }
+}
