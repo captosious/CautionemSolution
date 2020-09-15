@@ -58,5 +58,59 @@ namespace Cautionem.Resources.Components {
                 return ResourceManager.GetString("customeredit", resourceCulture);
             }
         }
+        
+        internal static string name {
+            get {
+                return ResourceManager.GetString("name", resourceCulture);
+            }
+        }
+        
+        internal static string fiscalid {
+            get {
+                return ResourceManager.GetString("fiscalid", resourceCulture);
+            }
+        }
+        
+        internal static string address {
+            get {
+                return ResourceManager.GetString("address", resourceCulture);
+            }
+        }
+        
+        internal static string town {
+            get {
+                return ResourceManager.GetString("town", resourceCulture);
+            }
+        }
+        
+        internal static string zip {
+            get {
+                return ResourceManager.GetString("zip", resourceCulture);
+            }
+        }
+        
+        internal static string locked {
+            get {
+                return ResourceManager.GetString("locked", resourceCulture);
+            }
+        }
+        
+        internal static string phone {
+            get {
+                return ResourceManager.GetString("phone", resourceCulture);
+            }
+        }
+        
+        internal static string email {
+            get {
+                return ResourceManager.GetString("email", resourceCulture);
+            }
+        }
+        
+        internal static string country {
+            get {
+                return ResourceManager.GetString("country", resourceCulture);
+            }
+        }
     }
 }

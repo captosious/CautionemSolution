@@ -17,8 +17,9 @@ namespace Cautionem.Models
 
         public virtual DbSet<Bank> Bank { get; set; }
         public virtual DbSet<Company> Company { get; set; }
+        public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<CustomerAddress> CustomerAddress { get; set; }
+        public virtual DbSet<File> File { get; set; }
         public virtual DbSet<Invoice> Invoice { get; set; }
         public virtual DbSet<InvoiceDetail> InvoiceDetail { get; set; }
         public virtual DbSet<Item> Item { get; set; }
@@ -26,11 +27,13 @@ namespace Cautionem.Models
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
         public virtual DbSet<PaymentType> PaymentType { get; set; }
+        public virtual DbSet<Tax> Tax { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+    
             }
         }
 
@@ -38,6 +41,9 @@ namespace Cautionem.Models
         {
             modelBuilder.Entity<Bank>(entity =>
             {
+                entity.HasKey(e => new { e.BankId, e.CompanyId })
+                    .HasName("PRIMARY");
+
                 entity.ToTable("bank", "Cautionem");
 
                 entity.HasIndex(e => e.Account)
@@ -47,15 +53,17 @@ namespace Cautionem.Models
                 entity.HasIndex(e => e.CompanyId)
                     .HasName("fk_bank_company_idx");
 
-                entity.Property(e => e.BankId).HasColumnName("bank_id");
+                entity.Property(e => e.BankId)
+                    .HasColumnName("bank_id")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.CompanyId).HasColumnName("company_id");
 
                 entity.Property(e => e.Account)
                     .IsRequired()
                     .HasColumnName("account")
                     .HasMaxLength(45)
                     .IsUnicode(false);
-
-                entity.Property(e => e.CompanyId).HasColumnName("company_id");
 
                 entity.Property(e => e.Description)
                     .HasColumnName("description")
@@ -83,7 +91,7 @@ namespace Cautionem.Models
 
                 entity.Property(e => e.Address)
                     .HasColumnName("address")
-                    .HasMaxLength(125)
+                    .HasMaxLength(45)
                     .IsUnicode(false);
 
                 entity.Property(e => e.City)
@@ -93,7 +101,7 @@ namespace Cautionem.Models
 
                 entity.Property(e => e.Email)
                     .HasColumnName("email")
-                    .HasMaxLength(125)
+                    .HasMaxLength(45)
                     .IsUnicode(false);
 
                 entity.Property(e => e.FiscalId)
@@ -119,9 +127,24 @@ namespace Cautionem.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<Country>(entity =>
+            {
+                entity.ToTable("country", "Cautionem");
+
+                entity.Property(e => e.CountryId)
+                    .HasColumnName("country_id")
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .HasColumnName("name")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Customer>(entity =>
             {
-                entity.HasKey(e => new { e.CustomerId, e.CompanyId })
+                entity.HasKey(e => new { e.CompanyId, e.CustomerId })
                     .HasName("PRIMARY");
 
                 entity.ToTable("customer", "Cautionem");
@@ -129,68 +152,53 @@ namespace Cautionem.Models
                 entity.HasIndex(e => e.CompanyId)
                     .HasName("fk_customer_company_idx");
 
+                entity.HasIndex(e => e.CountryId)
+                    .HasName("fk_customer_country1_idx");
+
+                entity.HasIndex(e => e.CustomerId)
+                    .HasName("customer_id_UNIQUE")
+                    .IsUnique();
+
                 entity.HasIndex(e => new { e.CompanyId, e.CustomerId })
                     .HasName("customer_address_customer");
+
+                entity.Property(e => e.CompanyId)
+                    .HasColumnName("company_id")
+                    .HasDefaultValueSql("'1'");
 
                 entity.Property(e => e.CustomerId)
                     .HasColumnName("customer_id")
                     .ValueGeneratedOnAdd();
 
-                entity.Property(e => e.CompanyId).HasColumnName("company_id");
+                entity.Property(e => e.Address)
+                    .HasColumnName("address")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CountryId)
+                    .IsRequired()
+                    .HasColumnName("country_id")
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Email)
+                    .HasColumnName("email")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FiscalId)
+                    .IsRequired()
+                    .HasColumnName("fiscal_id")
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Locked).HasColumnName("locked");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnName("name")
-                    .HasMaxLength(45)
+                    .HasMaxLength(75)
                     .IsUnicode(false);
-
-                entity.Property(e => e.TaxId)
-                    .HasColumnName("tax_id")
-                    .HasMaxLength(45)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.Company)
-                    .WithMany(p => p.Customer)
-                    .HasForeignKey(d => d.CompanyId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_customer_company");
-            });
-
-            modelBuilder.Entity<CustomerAddress>(entity =>
-            {
-                entity.ToTable("customer_address", "Cautionem");
-
-                entity.HasIndex(e => new { e.CompanyId, e.CustomerId })
-                    .HasName("fk_customer_address_customer_idx");
-
-                entity.HasIndex(e => new { e.CustomerId, e.CompanyId })
-                    .HasName("fk_customer_address_customer");
-
-                entity.Property(e => e.CustomerAddressId).HasColumnName("customer_address_id");
-
-                entity.Property(e => e.Address)
-                    .HasColumnName("address")
-                    .HasMaxLength(45)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CompanyId).HasColumnName("company_id");
-
-                entity.Property(e => e.ContactEmail)
-                    .HasColumnName("contact_email")
-                    .HasMaxLength(45)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ContactName)
-                    .HasColumnName("contact_name")
-                    .HasMaxLength(45)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ContactSurname)
-                    .HasColumnName("contact_surname")
-                    .HasMaxLength(45)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CustomerId).HasColumnName("customer_id");
 
                 entity.Property(e => e.Phone)
                     .HasColumnName("phone")
@@ -207,11 +215,66 @@ namespace Cautionem.Models
                     .HasMaxLength(45)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.C)
-                    .WithMany(p => p.CustomerAddress)
-                    .HasForeignKey(d => new { d.CustomerId, d.CompanyId })
+                entity.HasOne(d => d.Company)
+                    .WithMany(p => p.Customer)
+                    .HasForeignKey(d => d.CompanyId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_customer_address_customer");
+                    .HasConstraintName("fk_customer_company");
+
+                entity.HasOne(d => d.Country)
+                    .WithMany(p => p.Customer)
+                    .HasForeignKey(d => d.CountryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_customer_country1");
+            });
+
+            modelBuilder.Entity<File>(entity =>
+            {
+                entity.HasKey(e => new { e.FileId, e.CompanyId, e.CustomerId })
+                    .HasName("PRIMARY");
+
+                entity.ToTable("file", "Cautionem");
+
+                entity.HasIndex(e => e.CompanyId)
+                    .HasName("fk_file_company_idx");
+
+                entity.HasIndex(e => e.Reference)
+                    .HasName("reference_UNIQUE")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.CompanyId, e.CustomerId })
+                    .HasName("fk_file_customer_idx");
+
+                entity.Property(e => e.FileId)
+                    .HasColumnName("file_id")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.CompanyId).HasColumnName("company_id");
+
+                entity.Property(e => e.CustomerId).HasColumnName("customer_id");
+
+                entity.Property(e => e.Folder)
+                    .HasColumnName("folder")
+                    .HasMaxLength(245)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Reference)
+                    .IsRequired()
+                    .HasColumnName("reference")
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Company)
+                    .WithMany(p => p.File)
+                    .HasForeignKey(d => d.CompanyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_file_company");
+
+                entity.HasOne(d => d.C)
+                    .WithMany(p => p.File)
+                    .HasForeignKey(d => new { d.CompanyId, d.CustomerId })
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_file_customer");
             });
 
             modelBuilder.Entity<Invoice>(entity =>
@@ -247,7 +310,7 @@ namespace Cautionem.Models
 
             modelBuilder.Entity<Item>(entity =>
             {
-                entity.HasKey(e => new { e.CompanyId, e.ItemId })
+                entity.HasKey(e => new { e.ItemId, e.CompanyId })
                     .HasName("PRIMARY");
 
                 entity.ToTable("item", "Cautionem");
@@ -258,9 +321,11 @@ namespace Cautionem.Models
                 entity.HasIndex(e => new { e.CompanyId, e.ItemTypeId })
                     .HasName("index_type");
 
-                entity.Property(e => e.CompanyId).HasColumnName("company_id");
+                entity.Property(e => e.ItemId)
+                    .HasColumnName("item_id")
+                    .ValueGeneratedOnAdd();
 
-                entity.Property(e => e.ItemId).HasColumnName("item_id");
+                entity.Property(e => e.CompanyId).HasColumnName("company_id");
 
                 entity.Property(e => e.ItemTypeId).HasColumnName("item_type_id");
 
@@ -273,6 +338,11 @@ namespace Cautionem.Models
                 entity.Property(e => e.Price)
                     .HasColumnName("price")
                     .HasColumnType("decimal(5,2)");
+
+                entity.Property(e => e.TaxId)
+                    .HasColumnName("tax_id")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Company)
                     .WithMany(p => p.Item)
@@ -298,44 +368,30 @@ namespace Cautionem.Models
 
             modelBuilder.Entity<Order>(entity =>
             {
-                entity.HasKey(e => new { e.OrderId, e.CustomerId, e.CompanyId })
+                entity.HasKey(e => new { e.CompanyId, e.FileId, e.OrderId })
                     .HasName("PRIMARY");
 
                 entity.ToTable("order", "Cautionem");
 
-                entity.HasIndex(e => e.CompanyId)
-                    .HasName("fk_order_company_idx");
+                entity.HasIndex(e => e.FileId)
+                    .HasName("fk_order_file_idx");
+
+                entity.Property(e => e.CompanyId).HasColumnName("company_id");
+
+                entity.Property(e => e.FileId).HasColumnName("file_id");
 
                 entity.Property(e => e.OrderId).HasColumnName("order_id");
 
                 entity.Property(e => e.CustomerId).HasColumnName("customer_id");
 
-                entity.Property(e => e.CompanyId).HasColumnName("company_id");
-
                 entity.Property(e => e.Date)
                     .HasColumnName("date")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                entity.HasOne(d => d.Company)
-                    .WithMany(p => p.Order)
-                    .HasForeignKey(d => d.CompanyId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_order_company");
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>
             {
-                entity.HasKey(e => new { e.CompanyId, e.OrderId, e.OrderDetailId })
-                    .HasName("PRIMARY");
-
                 entity.ToTable("order_detail", "Cautionem");
-
-                entity.HasIndex(e => new { e.CompanyId, e.OrderId })
-                    .HasName("fk_order_detail_order1_idx");
-
-                entity.Property(e => e.CompanyId).HasColumnName("company_id");
-
-                entity.Property(e => e.OrderId).HasColumnName("order_id");
 
                 entity.Property(e => e.OrderDetailId).HasColumnName("order_detail_id");
 
@@ -356,7 +412,7 @@ namespace Cautionem.Models
 
             modelBuilder.Entity<PaymentType>(entity =>
             {
-                entity.HasKey(e => e.PaymentId)
+                entity.HasKey(e => new { e.PaymentId, e.CompanyId })
                     .HasName("PRIMARY");
 
                 entity.ToTable("payment_type", "Cautionem");
@@ -367,7 +423,9 @@ namespace Cautionem.Models
                 entity.HasIndex(e => e.PaymentId)
                     .HasName("index2");
 
-                entity.Property(e => e.PaymentId).HasColumnName("payment_id");
+                entity.Property(e => e.PaymentId)
+                    .HasColumnName("payment_id")
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.CompanyId).HasColumnName("company_id");
 
@@ -387,6 +445,23 @@ namespace Cautionem.Models
                     .HasForeignKey(d => d.CompanyId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_payment_type_company");
+            });
+
+            modelBuilder.Entity<Tax>(entity =>
+            {
+                entity.ToTable("tax", "Cautionem");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name)
+                    .HasColumnName("name")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Tax1)
+                    .HasColumnName("tax")
+                    .HasColumnType("decimal(2,2)")
+                    .HasDefaultValueSql("'0.00'");
             });
 
             OnModelCreatingPartial(modelBuilder);

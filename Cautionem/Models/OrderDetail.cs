@@ -5,8 +5,6 @@ namespace Cautionem.Models
 {
     public partial class OrderDetail
     {
-        public int CompanyId { get; set; }
-        public int OrderId { get; set; }
         public int OrderDetailId { get; set; }
         public string ItemName { get; set; }
         public string ItemDescription { get; set; }

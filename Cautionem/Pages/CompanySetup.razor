@@ -15,11 +15,14 @@
             <div class="col-md column_style"><PaymentType></PaymentType></div>
             <div class="col column_style"></div>
         </div>
+        <div class="row">
+            <div class="col-md column_style"><Customer></Customer></div>
+        </div>
     </div>
 
 @code
 {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         myBlocker.Show();
     }

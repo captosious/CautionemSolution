@@ -23,5 +23,39 @@
         <value>Edició de Client</value>
     </data>
     
+    <data name="name" xml:space="preserve">
+        <value>Nom</value>
+    </data>
     
+    <data name="fiscalid" xml:space="preserve">
+        <value>Id. Fiscal</value>
+    </data>
+    
+    <data name="address" xml:space="preserve">
+        <value>Adreça</value>
+    </data>
+    
+    <data name="town" xml:space="preserve">
+        <value>Població</value>
+    </data>
+    
+    <data name="zip" xml:space="preserve">
+        <value>Codi Postal</value>
+    </data>
+    
+    <data name="locked" xml:space="preserve">
+        <value>Bloquejat</value>
+    </data>
+    
+    <data name="phone" xml:space="preserve">
+        <value>Telèfon</value>
+    </data>
+    
+    <data name="email" xml:space="preserve">
+        <value>eCorreu</value>
+    </data>
+    
+    <data name="country" xml:space="preserve">
+        <value>Pais</value>
+    </data>
 </root>

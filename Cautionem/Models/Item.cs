@@ -10,6 +10,7 @@ namespace Cautionem.Models
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int ItemTypeId { get; set; }
+        public string TaxId { get; set; }
 
         public virtual Company Company { get; set; }
     }
