@@ -23,8 +23,9 @@
     </PackageReference>
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.21" />
     <PackageReference Include="MySql.Data" Version="8.0.21" />
-    <PackageReference Include="Radzen.Blazor" Version="2.12.0" />
+    <PackageReference Include="Radzen.Blazor" Version="2.13.0" />
     <PackageReference Include="Blazorise.Bootstrap" Version="0.9.1.2" />
+    <PackageReference Include="Blazorise.DataGrid" Version="0.9.1.2" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resources\Pages\Company.es-ES.resx">
@@ -133,5 +134,8 @@
     <Compile Update="Resources\Components\Customer.ca-ES.Designer.cs">
       <DependentUpon>Customer.ca-ES.resx</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\img\finance_background.jpg" />
   </ItemGroup>
 </Project>

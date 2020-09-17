@@ -1,43 +1,26 @@
 ﻿@page "/Customer"
 @using Cautionem.Models
-@using Blazorise
 
 @inject Cautionem.Data.CustomerService customerService
 @inject IStringLocalizer<Customer> Localizer
 
-<div>
-    <h2>@Localizer["customers"]</h2>
-    <Table Narrow="true" Hoverable="true">
-        <TableHeader Class="tableselection_style">
-            <TableRow>
-                <TableHeaderCell>@Localizer["fiscalid"]</TableHeaderCell>
-                <TableHeaderCell>@Localizer["name"]</TableHeaderCell>
-                <TableHeaderCell>@Localizer["address"]</TableHeaderCell>
-                <TableHeaderCell>@Localizer["town"]</TableHeaderCell>
-                <TableHeaderCell>@Localizer["zip"]</TableHeaderCell>
-                <TableHeaderCell>@Localizer["pais"]</TableHeaderCell>
-                <TableHeaderCell>@Localizer["locked"]</TableHeaderCell>
-                <TableHeaderCell>@Localizer["phone"]</TableHeaderCell>
-                <TableHeaderCell>@Localizer["email"]</TableHeaderCell>
-            </TableRow>
-        </TableHeader>
-        <TableBody>
-            @foreach (Cautionem.Models.Customer customerloop in customers)
-            {
-            <TableRow role="button" @onclick="@(() => CustomerEdit(customerloop))">
-                <TableRowCell>@customerloop.FiscalId</TableRowCell>
-                <TableRowCell>@customerloop.Name</TableRowCell>
-                <TableRowCell>@customerloop.Address</TableRowCell>
-                <TableRowCell>@customerloop.Town</TableRowCell>
-                <TableRowCell>@customerloop.CountryId</TableRowCell>
-                <TableRowCell>@customerloop.Locked</TableRowCell>
-                <TableRowCell>@customerloop.Phone</TableRowCell>
-                <TableRowCell>@customerloop.Email</TableRowCell>
-            </TableRow>
-            }
-        </TableBody>
-    </Table>
-</div>
+    <div>
+        <h2>@Localizer["customers"]</h2>
+        
+
+        <DataGrid TItem="Cautionem.Models.Customer" Data="@customers" ShowPager="true" PageSize="15" Narrow="true">
+            <DataGridCommandColumn TItem="Cautionem.Models.Customer" />
+            <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.FiscalId)" Caption="Fiscal ID"/>
+            <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Name)" Caption="Name" />
+            <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Address)" Caption="Address" />
+            <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Email)" Caption="EMail" />
+            <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Town)" Caption="Town"/>
+            <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Zip)" Caption="Zip" />
+        </DataGrid>
+
+    </div>
+
+
 
 @code {
 
@@ -64,5 +47,24 @@
         myBlocker.Show();
         await customerService.Save(customerEdit);
         myBlocker.Hide();
+    }
+
+    // Modal
+    private void CloseModal()
+    {
+        modalCustomer.Hide();
+    }
+
+    private void OpenModal()
+    {
+        modalCustomer.Show();
+    }
+
+    private void OnClosing(CancelEventArgs e)
+    {
+        customerService.Detach(customerEdit);
+        e.Cancel = false;
+        IsNew = false;
+        StateHasChanged();
     }
 }

@@ -33,7 +33,6 @@ namespace Cautionem.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-    
             }
         }
 
@@ -162,9 +161,7 @@ namespace Cautionem.Models
                 entity.HasIndex(e => new { e.CompanyId, e.CustomerId })
                     .HasName("customer_address_customer");
 
-                entity.Property(e => e.CompanyId)
-                    .HasColumnName("company_id")
-                    .HasDefaultValueSql("'1'");
+                entity.Property(e => e.CompanyId).HasColumnName("company_id");
 
                 entity.Property(e => e.CustomerId)
                     .HasColumnName("customer_id")
@@ -172,7 +169,7 @@ namespace Cautionem.Models
 
                 entity.Property(e => e.Address)
                     .HasColumnName("address")
-                    .HasMaxLength(100)
+                    .HasMaxLength(75)
                     .IsUnicode(false);
 
                 entity.Property(e => e.CountryId)
@@ -182,6 +179,7 @@ namespace Cautionem.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Email)
+                    .IsRequired()
                     .HasColumnName("email")
                     .HasMaxLength(45)
                     .IsUnicode(false);
@@ -192,12 +190,12 @@ namespace Cautionem.Models
                     .HasMaxLength(25)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Locked).HasColumnName("locked");
+                entity.Property(e => e.IsLocked).HasColumnName("is_locked");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnName("name")
-                    .HasMaxLength(75)
+                    .HasMaxLength(65)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Phone)
@@ -208,6 +206,11 @@ namespace Cautionem.Models
                 entity.Property(e => e.Town)
                     .HasColumnName("town")
                     .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Web)
+                    .HasColumnName("web")
+                    .HasMaxLength(75)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Zip)

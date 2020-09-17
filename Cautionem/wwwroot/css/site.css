@@ -13,6 +13,26 @@ html, body {
     margin: 5px;
 }
 
+.content_main {
+    margin:0px;
+    padding:0px;
+}
+
+.wrapper {
+    height: 100vh;
+    background-image: url("/img/finance_background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 0px;
+    margin: 0px;
+    opacity: 1;
+    vertical-align: central;
+}
+
+
+/* Net styles
+-------------------------------------------------- */
 .addonlabel_style {
     width: 100px;
 }

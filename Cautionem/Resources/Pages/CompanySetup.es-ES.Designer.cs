@@ -46,5 +46,11 @@ namespace Cautionem.Resources.Pages {
                 resourceCulture = value;
             }
         }
+        
+        internal static string CompanySetup {
+            get {
+                return ResourceManager.GetString("CompanySetup", resourceCulture);
+            }
+        }
     }
 }
