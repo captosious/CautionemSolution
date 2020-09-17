@@ -23,4 +23,41 @@
         <value>Edición de Clientes</value>
     </data>
     
+    <data name="name" xml:space="preserve">
+        <value>Nombre</value>
+    </data>
+    
+    <data name="fiscalid" xml:space="preserve">
+        <value>Id. Fiscal</value>
+    </data>
+    
+    <data name="address" xml:space="preserve">
+        <value>Dirección</value>
+    </data>
+    
+    <data name="town" xml:space="preserve">
+        <value>Población</value>
+    </data>
+    
+    <data name="zip" xml:space="preserve">
+        <value>Código Postal</value>
+    </data>
+    
+    <data name="locked" xml:space="preserve">
+        <value>Bloqueado</value>
+    </data>
+    
+    <data name="phone" xml:space="preserve">
+        <value>Teléfono</value>
+    </data>
+    
+    <data name="email" xml:space="preserve">
+        <value>eCorreo</value>
+    </data>
+    
+    <data name="country" xml:space="preserve">
+        <value>País</value>
+    </data>
+
+    
 </root>
