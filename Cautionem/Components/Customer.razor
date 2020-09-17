@@ -6,13 +6,13 @@
 
     <div>
         <h2>@Localizer["customers"]</h2>
-        <DataGrid TItem="Cautionem.Models.Customer" Filterable="true" Data="@customers" ShowPager="true" PageSize="15" Narrow="true" Sortable="true">
+        <DataGrid TItem="Cautionem.Models.Customer" Filterable="true" Data="@customers" ShowPager="true" PageSize="15" Narrow="true" Sortable="true" Hoverable="true">
             <DataGridCommandColumn TItem="Cautionem.Models.Customer" />
             <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.FiscalId)" Caption="@Localizer["fiscalid"]"/>
             <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Name)" Caption="@Localizer["name"]" />
             <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Address)" Caption="@Localizer["address"]" />
             <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Town)" Caption="@Localizer["town"]"/>
-            <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Zip)" Caption="@Localizer["zip"]" />
+            <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Zip)" Caption="@Localizer["zip"]" Sortable="false"/>
         </DataGrid>
     </div>
 
