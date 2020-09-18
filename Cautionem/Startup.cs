@@ -18,6 +18,7 @@ using Cautionem.Data;
 using Cautionem.Shared;
 using Blazorise;
 using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
 
 namespace Cautionem
 {
@@ -34,9 +35,11 @@ namespace Cautionem
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddEmptyProviders();
+
             services.AddDbContext<CautionemContext>(options =>
             {
-                options.UseMySQL(Configuration.GetConnectionString("MySQLConnectionString"));
+                options.UseMySQL(Configuration.GetConnectionString("MySQLConnectionString")).ConfigureWarnings(;
                 options.EnableSensitiveDataLogging(false);
             }
             );
@@ -61,8 +64,9 @@ namespace Cautionem
             {
                 options.ChangeTextOnKeyPress = false; // optional
             })
-                .AddBootstrapProviders();                                 
-            }
+                .AddBootstrapProviders()
+                .AddFontAwesomeIcons();
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -98,7 +102,9 @@ namespace Cautionem
 
             app.UseRouting();
 
-            app.ApplicationServices.UseBootstrapProviders();
+            app.ApplicationServices
+                .UseBootstrapProviders()
+                .UseFontAwesomeIcons();
 
             app.UseEndpoints(endpoints =>
             {
