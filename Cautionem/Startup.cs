@@ -19,6 +19,7 @@ using Cautionem.Shared;
 using Blazorise;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Cautionem
 {
@@ -39,7 +40,7 @@ namespace Cautionem
 
             services.AddDbContext<CautionemContext>(options =>
             {
-                options.UseMySQL(Configuration.GetConnectionString("MySQLConnectionString")).ConfigureWarnings(;
+                options.UseMySQL(Configuration.GetConnectionString("MySQLConnectionString"));
                 options.EnableSensitiveDataLogging(false);
             }
             );
@@ -62,7 +63,7 @@ namespace Cautionem
             //Blazorise
             services.AddBlazorise(options =>
             {
-                options.ChangeTextOnKeyPress = false; // optional
+                options.ChangeTextOnKeyPress = false; options.ChangeSliderOnHold = true; // optional
             })
                 .AddBootstrapProviders()
                 .AddFontAwesomeIcons();
