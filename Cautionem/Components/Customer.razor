@@ -7,8 +7,9 @@
 
     <div>
         <h2>@Localizer["customers"]</h2>
-        <DataGrid TItem="Cautionem.Models.Customer" Data="@customers" @bind-SelectedRow="@customerEdit" Editable="false" Filterable="true" Sortable="true" ShowPager="true" PageSize="10" Narrow="true" Hoverable="true">
+        <DataGrid TItem="Cautionem.Models.Customer" Data="@customers" @bind-SelectedRow="@customerEdit" RowClicked="@RowClicking" Editable="false" Filterable="true" Sortable="true" ShowPager="true" PageSize="10" Narrow="true" Hoverable="true">
             <DataGridCommandColumn TItem="Cautionem.Models.Customer" />
+            
             <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.FiscalId)" Caption="@Localizer["fiscalid"]" TextAlignment="TextAlignment.Left" />
             <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Name)" Caption="@Localizer["name"]" TextAlignment="TextAlignment.Justified" />
             <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Address)" Caption="@Localizer["address"]" TextAlignment="TextAlignment.Justified" />
@@ -21,78 +22,107 @@
         <ModalBackdrop />
         <ModalContent Size="ModalSize.Default" Centered="true">
             <ModalHeader>
-                @*<i class="fas fa-edit fa-2x"></i>*@
-                <Icon Name="IconName.Mail"></Icon>
+                <i class="fas fa-edit fa-2x"></i>
                 <ModalTitle>@Localizer["customeredit"]</ModalTitle>
                 <CloseButton Clicked="@CloseModal" />
             </ModalHeader>
             <ModalBody>
-                <Addons>
-                    <Addon AddonType="AddonType.Start">
-                        <AddonLabel Class="addonlabel_style">@Localizer["fiscalid"]</AddonLabel>
-                    </Addon>
-                    <Addon AddonType="AddonType.Body">
-                        <Addon AddonType="AddonType.Body">
-                            <TextEdit @bind-Text="@customerEdit.fiscalid" />
+                <div>
+                    <Addons>
+                        <Addon AddonType="AddonType.Start">
+                            <AddonLabel Class="addonlabel_style">@Localizer["fiscalid"]</AddonLabel>
                         </Addon>
-                    </Addon>
-                    <Addon AddonType="AddonType.Start">
-                        <AddonLabel Class="addonlabel_style">@Localizer["name"]</AddonLabel>
-                    </Addon>
-                    <Addon AddonType="AddonType.Body">
                         <Addon AddonType="AddonType.Body">
-                            <TextEdit @bind-Text="@customerEdit.Name" />
+                            <Addon AddonType="AddonType.Body">
+                                <TextEdit @bind-Text="@customerEdit.FiscalId" />
+                            </Addon>
                         </Addon>
-                    </Addon>
-                    <Addon AddonType="AddonType.Start">
-                        <AddonLabel Class="addonlabel_style">@Localizer["address"]</AddonLabel>
-                    </Addon>
-                    <Addon AddonType="AddonType.Body">
+                    </Addons>
+                </div>
+                <div>
+                    <Addons>
+                        <Addon AddonType="AddonType.Start">
+                            <AddonLabel Class="addonlabel_style">@Localizer["name"]</AddonLabel>
+                        </Addon>
                         <Addon AddonType="AddonType.Body">
-                            <TextEdit @bind-Text="@customerEdit.Address" />
+                            <Addon AddonType="AddonType.Body">
+                                <TextEdit @bind-Text="@customerEdit.Name" />
+                            </Addon>
                         </Addon>
-                    </Addon>
-                    <Addon AddonType="AddonType.Start">
-                        <AddonLabel Class="addonlabel_style">@Localizer["town"]</AddonLabel>
-                    </Addon>
-                    <Addon AddonType="AddonType.Body">
+                    </Addons>
+                </div>
+                <div>
+                    <Addons>
+                        <Addon AddonType="AddonType.Start">
+                            <AddonLabel Class="addonlabel_style">@Localizer["address"]</AddonLabel>
+                        </Addon>
                         <Addon AddonType="AddonType.Body">
-                            <TextEdit @bind-Text="@customerEdit.Town" />
+                            <Addon AddonType="AddonType.Body">
+                                <TextEdit @bind-Text="@customerEdit.Address" />
+                            </Addon>
                         </Addon>
-                    </Addon>
-                    <Addon AddonType="AddonType.Start">
-                        <AddonLabel Class="addonlabel_style">@Localizer["zip"]</AddonLabel>
-                    </Addon>
-                    <Addon AddonType="AddonType.Body">
+                    </Addons>
+                </div>
+                <div>
+                    <Addons>
+                        <Addon AddonType="AddonType.Start">
+                            <AddonLabel Class="addonlabel_style">@Localizer["town"]</AddonLabel>
+                        </Addon>
                         <Addon AddonType="AddonType.Body">
-                            <TextEdit @bind-Text="@customerEdit.Zip" />
+                            <Addon AddonType="AddonType.Body">
+                                <TextEdit @bind-Text="@customerEdit.Town" />
+                            </Addon>
                         </Addon>
-                    </Addon>
-                    <Addon AddonType="AddonType.Start">
-                        <AddonLabel Class="addonlabel_style">@Localizer["phone"]</AddonLabel>
-                    </Addon>
-                    <Addon AddonType="AddonType.Body">
+                    </Addons>
+                </div>
+                <div>
+                    <Addons>
+                        <Addon AddonType="AddonType.Start">
+                            <AddonLabel Class="addonlabel_style">@Localizer["zip"]</AddonLabel>
+                        </Addon>
                         <Addon AddonType="AddonType.Body">
-                            <TextEdit @bind-Text="@customerEdit.Phone" />
+                            <Addon AddonType="AddonType.Body">
+                                <TextEdit @bind-Text="@customerEdit.Zip" />
+                            </Addon>
                         </Addon>
-                    </Addon>
-                    <Addon AddonType="AddonType.Start">
-                        <AddonLabel Class="addonlabel_style">@Localizer["email"]</AddonLabel>
-                    </Addon>
-                    <Addon AddonType="AddonType.Body">
+                    </Addons>
+                </div>
+                <div>
+                    <Addons>
+                        <Addon AddonType="AddonType.Start">
+                            <AddonLabel Class="addonlabel_style">@Localizer["phone"]</AddonLabel>
+                        </Addon>
                         <Addon AddonType="AddonType.Body">
-                            <TextEdit @bind-Text="@customerEdit.Email" />
+                            <Addon AddonType="AddonType.Body">
+                                <TextEdit @bind-Text="@customerEdit.Phone" />
+                            </Addon>
                         </Addon>
-                    </Addon>
-                    <Addon AddonType="AddonType.Start">
-                        <AddonLabel Class="addonlabel_style">@Localizer["country"]</AddonLabel>
-                    </Addon>
-                    <Addon AddonType="AddonType.Body">
+                    </Addons>
+                </div>
+                <div>
+                    <Addons>
+                        <Addon AddonType="AddonType.Start">
+                            <AddonLabel Class="addonlabel_style">@Localizer["email"]</AddonLabel>
+                        </Addon>
                         <Addon AddonType="AddonType.Body">
-                            <TextEdit @bind-Text="@customerEdit.CountryId" />
+                            <Addon AddonType="AddonType.Body">
+                                <TextEdit @bind-Text="@customerEdit.Email" />
+                            </Addon>
                         </Addon>
-                    </Addon>
-                </Addons>
+                    </Addons>
+                </div>
+                <div>
+                    <Addons>
+                        <Addon AddonType="AddonType.Start">
+                            <AddonLabel Class="addonlabel_style">@Localizer["country"]</AddonLabel>
+                        </Addon>
+                        <Addon AddonType="AddonType.Body">
+                            <Addon AddonType="AddonType.Body">
+                                <TextEdit @bind-Text="@customerEdit.CountryId" />
+                            </Addon>
+                        </Addon>
+                    </Addons>
+                </div>
             </ModalBody>
             <ModalFooter>
                 <button class="btn btn_general btn-success" @onclick="Save">@SharedLocalizer["MSG_SAVE"]</button>
@@ -153,7 +183,7 @@
 
     }
 
-    void RowClicking(Cautionem.Models.Customer customer)
+    protected void RowClicking()
     {
         modalCustomer.Show();
     }
