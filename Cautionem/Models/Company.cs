@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace Cautionem.Models
 {
     public partial class Company
     {
         public Company()
         {
-            Bank = new HashSet<Bank>();
-            Customer = new HashSet<Customer>();
-            File = new HashSet<File>();
-            Item = new HashSet<Item>();
-            PaymentType = new HashSet<PaymentType>();
+            Banks = new HashSet<Bank>();
+            Customers = new HashSet<Customer>();
+            Files = new HashSet<File>();
+            Items = new HashSet<Item>();
+            PaymentTypes = new HashSet<PaymentType>();
         }
 
         public int CompanyId { get; set; }
@@ -23,10 +25,10 @@ namespace Cautionem.Models
         public string Email { get; set; }
         public string Phone { get; set; }
 
-        public virtual ICollection<Bank> Bank { get; set; }
-        public virtual ICollection<Customer> Customer { get; set; }
-        public virtual ICollection<File> File { get; set; }
-        public virtual ICollection<Item> Item { get; set; }
-        public virtual ICollection<PaymentType> PaymentType { get; set; }
+        public virtual ICollection<Bank> Banks { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual ICollection<File> Files { get; set; }
+        public virtual ICollection<Item> Items { get; set; }
+        public virtual ICollection<PaymentType> PaymentTypes { get; set; }
     }
 }

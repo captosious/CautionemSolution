@@ -17,16 +17,16 @@
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
-    <PackageReference Include="MySql.Data" Version="8.0.22" />
-    <PackageReference Include="Radzen.Blazor" Version="2.18.10" />
-    <PackageReference Include="Blazorise.Bootstrap" Version="0.9.2.4" />
-    <PackageReference Include="Blazorise.DataGrid" Version="0.9.2.4" />
-    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.2.4" />
+    <PackageReference Include="MySql.Data" Version="8.0.26" />
+    <PackageReference Include="Radzen.Blazor" Version="3.7.3" />
+    <PackageReference Include="Blazorise.Bootstrap" Version="0.9.4.1" />
+    <PackageReference Include="Blazorise.DataGrid" Version="0.9.4.1" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.4.1" />
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.5" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resources\Pages\Company.es-ES.resx">
@@ -138,5 +138,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\img\finance_background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Properties\PublishProfiles\FolderProfile 2.pubxml" />
+    <None Remove="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Remove="Properties\PublishProfiles\FolderProfile 4.pubxml" />
+    <None Remove="Properties\PublishProfiles\FolderProfile 6.pubxml" />
+    <None Remove="Properties\PublishProfiles\FolderProfile 3.pubxml" />
+    <None Remove="Properties\PublishProfiles\FolderProfile 1.pubxml" />
+    <None Remove="Properties\PublishProfiles\FolderProfile 5.pubxml" />
   </ItemGroup>
 </Project>

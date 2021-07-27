@@ -103,10 +103,6 @@ namespace Cautionem
 
             app.UseRouting();
 
-            app.ApplicationServices
-                .UseBootstrapProviders()
-                .UseFontAwesomeIcons();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
