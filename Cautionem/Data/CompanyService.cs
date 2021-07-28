@@ -21,12 +21,12 @@ namespace Cautionem.Data
 
         public async Task<Company> Get(int companyId)
         {
-            return await Task.FromResult((Company)cautionemContext.Company.FirstOrDefault(x => x.CompanyId == companyId));
+            return await Task.FromResult((Company)cautionemContext.Companies.FirstOrDefault(x => x.CompanyId == companyId));
         }
 
         public async Task Save(Company company)
         {
-            cautionemContext.Company.Update(company);
+            cautionemContext.Companies.Update(company);
             //if (cautionemContext.ModelState.IsValid)
             //{
                 await cautionemContext.SaveChangesAsync();

@@ -23,12 +23,12 @@ namespace Cautionem.Data
 
         public async Task<IEnumerable<Bank>> GetAll(int companyId)
         {
-            return await Task.FromResult((IEnumerable<Bank>)cautionemContext.Bank.Where(x => x.CompanyId == companyId));
+            return await Task.FromResult((IEnumerable<Bank>)cautionemContext.Banks.Where(x => x.CompanyId == companyId));
         }
 
         public async Task<Bank> Get(int companyId)
         {
-            return await Task.FromResult((Bank)cautionemContext.Bank.FirstOrDefault(x => x.CompanyId == companyId));
+            return await Task.FromResult((Bank)cautionemContext.Banks.FirstOrDefault(x => x.CompanyId == companyId));
         }
 
         public async Task Add(Bank bank)

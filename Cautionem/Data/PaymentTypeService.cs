@@ -21,12 +21,12 @@ namespace Cautionem.Data
 
         public async Task<IEnumerable<PaymentType>> GetAll(int companyId)
         {
-            return await Task.FromResult((IEnumerable<PaymentType>)cautionemContext.PaymentType.Where(x => x.CompanyId == companyId));
+            return await Task.FromResult((IEnumerable<PaymentType>)cautionemContext.PaymentTypes.Where(x => x.CompanyId == companyId));
         }
 
         public async Task<PaymentType> Get(int companyId)
         {
-            return await Task.FromResult((PaymentType)cautionemContext.PaymentType.FirstOrDefault(x => x.CompanyId == companyId));
+            return await Task.FromResult((PaymentType)cautionemContext.PaymentTypes.FirstOrDefault(x => x.CompanyId == companyId));
         }
 
         public async Task Add(PaymentType paymentType)
@@ -37,7 +37,7 @@ namespace Cautionem.Data
 
         public async Task Save(PaymentType paymentType)
         {
-            cautionemContext.PaymentType.Update(paymentType);
+            cautionemContext.PaymentTypes.Update(paymentType);
             await cautionemContext.SaveChangesAsync();
         }
 

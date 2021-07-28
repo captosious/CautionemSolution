@@ -31,13 +31,12 @@ namespace Cautionem.Models
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<PaymentType> PaymentTypes { get; set; }
         public virtual DbSet<Tax> Taxes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySQL("server=enterprise.delta.engineering;port=3306;user=roc;password=Montmany1;database=Cautionem");
             }
         }
 
@@ -472,6 +471,49 @@ namespace Cautionem.Models
                     .HasColumnType("decimal(2,2)")
                     .HasColumnName("tax")
                     .HasDefaultValueSql("'0.00'");
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(e => new { e.Id, e.Username, e.CompanyId })
+                    .HasName("PRIMARY");
+
+                entity.ToTable("users");
+
+                entity.HasIndex(e => e.CompanyId, "fk_users_company_idx");
+
+                entity.HasIndex(e => e.Username, "username_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Username)
+                    .HasMaxLength(45)
+                    .HasColumnName("username");
+
+                entity.Property(e => e.CompanyId).HasColumnName("company_id");
+
+                entity.Property(e => e.FamilyName)
+                    .HasMaxLength(25)
+                    .HasColumnName("family_name");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .HasColumnName("name");
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .HasColumnName("password");
+
+                entity.HasOne(d => d.Company)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.CompanyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_users_company1");
             });
 
             OnModelCreatingPartial(modelBuilder);
