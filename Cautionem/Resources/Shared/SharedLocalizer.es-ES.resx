@@ -82,4 +82,8 @@
     <data name="setup" xml:space="preserve">
         <value>Configuración</value>
     </data>
+
+    <data name="customer" xml:space="preserve">
+        <value>Clientes</value>
+    </data>
 </root>

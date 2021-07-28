@@ -142,5 +142,11 @@ namespace Cautionem.Resources.Shared {
                 return ResourceManager.GetString("setup", resourceCulture);
             }
         }
+        
+        internal static string customer {
+            get {
+                return ResourceManager.GetString("customer", resourceCulture);
+            }
+        }
     }
 }
