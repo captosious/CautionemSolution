@@ -148,5 +148,11 @@ namespace Cautionem.Resources.Shared {
                 return ResourceManager.GetString("customer", resourceCulture);
             }
         }
+        
+        internal static string customercontact {
+            get {
+                return ResourceManager.GetString("customercontact", resourceCulture);
+            }
+        }
     }
 }

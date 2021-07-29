@@ -112,5 +112,17 @@ namespace Cautionem.Resources.Components {
                 return ResourceManager.GetString("country", resourceCulture);
             }
         }
+        
+        internal static string customerdetail {
+            get {
+                return ResourceManager.GetString("customerdetail", resourceCulture);
+            }
+        }
+        
+        internal static string customercontacts {
+            get {
+                return ResourceManager.GetString("customercontacts", resourceCulture);
+            }
+        }
     }
 }

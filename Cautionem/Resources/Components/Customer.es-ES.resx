@@ -62,5 +62,11 @@
         <value>País</value>
     </data>
 
-    
+    <data name="customerdetail" xml:space="preserve">
+        <value>Detalle del cliente</value>
+    </data>
+
+    <data name="customercontacts" xml:space="preserve">
+        <value>Contactos del cliente</value>
+    </data>
 </root>

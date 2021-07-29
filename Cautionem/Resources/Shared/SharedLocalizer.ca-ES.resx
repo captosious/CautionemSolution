@@ -86,4 +86,8 @@
     <data name="customer" xml:space="preserve">
         <value>Clients</value>
     </data>
+
+    <data name="customercontact" xml:space="preserve">
+        <value>Contactes Clients</value>
+    </data>
 </root>
