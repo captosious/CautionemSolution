@@ -121,9 +121,34 @@
     <button class="btn btn_general btn-success" @onclick="Save">@SharedLocalizer["MSG_SAVE"]</button>
 }
 
+
+
+@if(customersContacts.Count()>0)
+{
+
+<div>
+    <h2>@Localizer["customercontacts"]</h2>
+    <DataGrid TItem="Cautionem.Models.CustomerContact" Data="@customersContacts" @bind-SelectedRow="@customerContactEdit" RowClicked="@RowClicking" Editable="false" Filterable="true" Sortable="true" ShowPager="true" PageSize="10" Narrow="true" Hoverable="true">
+        <DataGridCommandColumn TItem="Cautionem.Models.Customer" />
+
+        <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Id)" Caption="@Localizer["fiscalid"]" TextAlignment="TextAlignment.Left" />
+        <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Name)" Caption="@Localizer["name"]" TextAlignment="TextAlignment.Justified" />
+        <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Address)" Caption="@Localizer["address"]" TextAlignment="TextAlignment.Justified" />
+        <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Town)" Caption="@Localizer["town"]" TextAlignment="TextAlignment.Justified" />
+        <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Zip)" Caption="@Localizer["zip"]" TextAlignment="TextAlignment.Left" />
+    </DataGrid>
+</div>
+
+}
+
+
+
 @code{
     private Cautionem.Models.Customer customerEdit = new Cautionem.Models.Customer();
     private IEnumerable<Cautionem.Models.Customer> customers = new List<Cautionem.Models.Customer>();
+
+    private Cautionem.Models.CustomerContact customerContactEdit = new Cautionem.Models.CustomerContact();
+    private IEnumerable<Cautionem.Models.CustomerContact> customersContacts = new List<Cautionem.Models.CustomerContact>();
 
     //Modal
     private Modal modalCustomer;
@@ -131,8 +156,10 @@
     private bool ShowDetail = false;
 
     protected override async Task OnInitializedAsync()
-    {
+    { 
+        myBlocker.Show();
         customers = await customerService.GetAll(1);
+        myBlocker.Hide();
     }
 
     private void Edit(Cautionem.Models.Customer customer)
@@ -148,7 +175,7 @@
         myBlocker.Hide();
     }
 
-    // Modal
+    // Modal Contacts
     private void CloseModal()
     {
         modalCustomer.Hide();
