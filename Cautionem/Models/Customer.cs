@@ -24,7 +24,7 @@ namespace Cautionem.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Web { get; set; }
-        public int IsLocked { get; set; }
+        public bool IsLocked { get; set; }
 
         public virtual Company Company { get; set; }
         public virtual Country Country { get; set; }

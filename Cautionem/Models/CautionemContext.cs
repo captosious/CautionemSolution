@@ -37,6 +37,7 @@ namespace Cautionem.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+
             }
         }
 
@@ -163,7 +164,6 @@ namespace Cautionem.Models
                     .HasColumnName("country_id");
 
                 entity.Property(e => e.Email)
-                    .IsRequired()
                     .HasMaxLength(45)
                     .HasColumnName("email");
 

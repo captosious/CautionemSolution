@@ -1,0 +1,34 @@
+﻿@page "/CustomerSearch"
+@using Cautionem.Models
+@using System.Linq
+
+@inject Cautionem.Data.CustomerService customerService
+@inject IStringLocalizer<Customer> Localizer
+
+<div>
+    <DataGrid TItem="Cautionem.Models.Customer" Data="@customers" @bind-SelectedRow="@customerEdit" RowClicked="@RowClicking" Editable="false" Filterable="true" Sortable="true" ShowPager="true" PageSize="10" Narrow="true" Hoverable="true">
+        <DataGridCommandColumn TItem="Cautionem.Models.Customer" />
+
+        <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.FiscalId)" Caption="@Localizer["fiscalid"]" TextAlignment="TextAlignment.Left" />
+        <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Name)" Caption="@Localizer["name"]" TextAlignment="TextAlignment.Justified" />
+        <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Address)" Caption="@Localizer["address"]" TextAlignment="TextAlignment.Justified" />
+        <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Town)" Caption="@Localizer["town"]" TextAlignment="TextAlignment.Justified" />
+        <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Zip)" Caption="@Localizer["zip"]" TextAlignment="TextAlignment.Left" />
+    </DataGrid>
+</div>
+
+
+
+@code{
+
+    private Cautionem.Models.Customer customerEdit = new Cautionem.Models.Customer();
+    private IEnumerable<Cautionem.Models.Customer> customers = new List<Cautionem.Models.Customer>();
+
+
+    protected void RowClicking()
+    {
+        //modalCustomer.Show();
+        
+        StateHasChanged();
+    }
+}
