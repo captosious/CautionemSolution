@@ -22,9 +22,9 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="MySql.Data" Version="8.0.26" />
-    <PackageReference Include="Blazorise.Bootstrap" Version="0.9.4.2" />
-    <PackageReference Include="Blazorise.DataGrid" Version="0.9.4.2" />
-    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.4.2" />
+    <PackageReference Include="Blazorise.Bootstrap" Version="0.9.4.3" />
+    <PackageReference Include="Blazorise.DataGrid" Version="0.9.4.3" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.4.3" />
     <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.5" />
   </ItemGroup>
   <ItemGroup>
