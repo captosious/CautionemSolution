@@ -5,7 +5,7 @@
 @inject Cautionem.Data.CustomerService customerService
 @inject IStringLocalizer<Components.Customer> Localizer
 
-<CustomerSearch CustomerSelected="parCustomer" />
+<CustomerSearch OnCustomerSelected=CustomerSelected />
 
 <Modal @ref="modalWindowEdit" Closing="@OnClosing">
     <ModalContent Size="ModalSize.Default" Centered="true">

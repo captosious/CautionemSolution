@@ -5,7 +5,7 @@
 @inject Cautionem.Data.CustomerService customerService
 @inject IStringLocalizer<Components.Customer> Localizer
 
-<CustomerSearch CustomerSelected="parCustomer" />
+<CustomerSearch CustomerSelected=@searchCustomerSelected />
 
 <Modal @ref="modalWindowEdit" Closing="@OnClosing">
     <ModalContent Size="ModalSize.Default" Centered="true">
@@ -132,8 +132,7 @@
         ShowDetail = false;
     }
 
-
-    private void CustomerSelected(Models.Customer customer)
+    private void searchCustomerSelected(Models.Customer customer)
     {
         ShowDetail = false;
     }

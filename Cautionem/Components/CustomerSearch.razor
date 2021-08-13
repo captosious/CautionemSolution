@@ -6,7 +6,7 @@
 @inject IStringLocalizer<Customer> Localizer
 
 <div>
-    <DataGrid TItem="Cautionem.Models.Customer" Data="@customers" @bind-SelectedRow="@CustomerSelected" RowClicked="@NotifySelection" Editable="false" Filterable="true" Sortable="true" ShowPager="true" PageSize="10" Narrow="true" Hoverable="true">
+    <DataGrid TItem="Cautionem.Models.Customer" Data="@customers" @bind-SelectedRow="@customerEdit" RowClicked="@NotifySelection" Editable="false" Filterable="true" Sortable="true" ShowPager="true" PageSize="10" Narrow="true" Hoverable="true">
         <DataGridCommandColumn TItem="Cautionem.Models.Customer" />
 
         <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.FiscalId)" Caption="@Localizer["fiscalid"]" TextAlignment="TextAlignment.Left" />
@@ -20,9 +20,7 @@
 @code{
     [Parameter]
     public EventCallback<Cautionem.Models.Customer> CustomerSelectedChanged { get; set; }
-    [Parameter]
-    public Models.Customer CustomerSelected { get; set; }
-
+    
     private Cautionem.Models.Customer customerEdit = new Cautionem.Models.Customer();
     private IEnumerable<Cautionem.Models.Customer> customers = new List<Cautionem.Models.Customer>();
 
@@ -33,14 +31,8 @@
         //myBlocker.Hide();
     }
 
-    private void RowClicking()
-    {
-        CustomerSelectedChanged.InvokeAsync(CustomerSelected);
-    }
-
     async Task NotifySelection(DataGridRowMouseEventArgs<Cautionem.Models.Customer> e)
     {
-        CustomerSelected = e.Item;
         await CustomerSelectedChanged.InvokeAsync(e.Item);
     }
 }
