@@ -13,6 +13,7 @@ namespace Cautionem.Models
         public string Password { get; set; }
         public string Name { get; set; }
         public string FamilyName { get; set; }
+        public byte[] Picture { get; set; }
 
         public virtual Company Company { get; set; }
     }

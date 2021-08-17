@@ -37,7 +37,6 @@ namespace Cautionem.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-
             }
         }
 
@@ -210,23 +209,26 @@ namespace Cautionem.Models
 
             modelBuilder.Entity<CustomerContact>(entity =>
             {
+                entity.HasKey(e => new { e.Id, e.CompanyId, e.CustomerId })
+                    .HasName("PRIMARY");
+
                 entity.ToTable("customer_contacts");
 
                 entity.HasIndex(e => new { e.CompanyId, e.CustomerId }, "fk_customer_contacts_customer_idx");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.CompanyId).HasColumnName("company_id");
+
+                entity.Property(e => e.CustomerId).HasColumnName("customer_id");
+
                 entity.Property(e => e.Address)
                     .HasMaxLength(45)
                     .HasColumnName("address");
 
-                entity.Property(e => e.CompanyId).HasColumnName("company_id");
-
                 entity.Property(e => e.CountryId)
                     .HasMaxLength(45)
                     .HasColumnName("country_id");
-
-                entity.Property(e => e.CustomerId).HasColumnName("customer_id");
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(45)
@@ -490,7 +492,7 @@ namespace Cautionem.Models
                     .HasColumnName("id");
 
                 entity.Property(e => e.Username)
-                    .HasMaxLength(45)
+                    .HasMaxLength(25)
                     .HasColumnName("username");
 
                 entity.Property(e => e.CompanyId).HasColumnName("company_id");
@@ -508,6 +510,10 @@ namespace Cautionem.Models
                     .IsRequired()
                     .HasMaxLength(45)
                     .HasColumnName("password");
+
+                entity.Property(e => e.Picture)
+                    .HasColumnType("blob")
+                    .HasColumnName("picture");
 
                 entity.HasOne(d => d.Company)
                     .WithMany(p => p.Users)
