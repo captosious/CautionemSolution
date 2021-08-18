@@ -20,15 +20,15 @@ namespace Cautionem.Data
             this.cautionemContext = cautionemContext;
         }
 
-        public async Task<IEnumerable<Customer>> GetAll(int companyId)
+        public async Task<IEnumerable<Customer>> GetAll(int intCompanyID)
         {
             IEnumerable<Customer> list;
 
             try {
                 //list = (IEnumerable<Customer>)cautionemContext.Customers.AsEnumerable().Where(x => x.CompanyId == companyId);
-                list = cautionemContext.Customers.Where(x => x.CompanyId == companyId);
-                //return await Task.FromResult((IEnumerable<Customer>)cautionemContext.Customers.AsEnumerable().Where(x => x.CompanyId == companyId));
-                return (list);
+                //list = (IEnumerable<Customer>)cautionemContext.Customers.Where<Customer>(x => x.CompanyId == intCompanyID);
+                return await Task.FromResult((IEnumerable<Customer>)cautionemContext.Customers.AsEnumerable().Where(x => x.CompanyId == intCompanyID));
+                //return (list);
             }
             catch {
                 return null;

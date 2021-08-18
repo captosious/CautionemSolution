@@ -8,7 +8,6 @@
 <div>
     <DataGrid TItem="Cautionem.Models.Customer" Data="@customers" RowClicked="@NotifySelection" Editable="false" Filterable="true" Sortable="true" ShowPager="true" PageSize="10" Narrow="true" Hoverable="true">
         <DataGridCommandColumn TItem="Cautionem.Models.Customer" />
-
         <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.FiscalId)" Caption="@Localizer["fiscalid"]" TextAlignment="TextAlignment.Left" />
         <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Name)" Caption="@Localizer["name"]" TextAlignment="TextAlignment.Justified" />
         <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Address)" Caption="@Localizer["address"]" TextAlignment="TextAlignment.Justified" />
@@ -20,14 +19,15 @@
 @code{
     [Parameter]
     public EventCallback<Cautionem.Models.Customer> OnCustomerSelected { get; set; }
-    
+
     //private Cautionem.Models.Customer customerEdit = new Cautionem.Models.Customer();
-    private IEnumerable<Cautionem.Models.Customer> customers = new List<Cautionem.Models.Customer>();
+    public IEnumerable<Cautionem.Models.Customer> customers = new List<Cautionem.Models.Customer>();
 
     protected override async Task OnInitializedAsync()
     {
         //myBlocker.Show();
         customers = await customerService.GetAll(1);
+        int i = customers.Count();
         //myBlocker.Hide();
     }
 
