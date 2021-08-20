@@ -8,11 +8,12 @@
 <div>
     <DataGrid TItem="Cautionem.Models.Customer" Data="@customers" RowClicked="@NotifySelection" Editable="false" Filterable="true" Sortable="true" ShowPager="true" PageSize="10" Narrow="true" Hoverable="true">
         <DataGridCommandColumn TItem="Cautionem.Models.Customer" />
-        <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.FiscalId)" Caption="@Localizer["fiscalid"]" TextAlignment="TextAlignment.Left" />
         <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Name)" Caption="@Localizer["name"]" TextAlignment="TextAlignment.Justified" />
-        <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Address)" Caption="@Localizer["address"]" TextAlignment="TextAlignment.Justified" />
+        @*<DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Address)" Caption="@Localizer["address"]" TextAlignment="TextAlignment.Justified" />
         <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Zip)" Caption="@Localizer["zip"]" TextAlignment="TextAlignment.Left" />
-        <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Town)" Caption="@Localizer["town"]" TextAlignment="TextAlignment.Justified" />
+        <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Town)" Caption="@Localizer["town"]" TextAlignment="TextAlignment.Justified" />*@
+        <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Email)" Caption="@Localizer["email"]" TextAlignment="TextAlignment.Justified" />
+
     </DataGrid>
 </div>
 
