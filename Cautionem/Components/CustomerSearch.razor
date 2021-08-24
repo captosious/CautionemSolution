@@ -13,7 +13,6 @@
         <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Zip)" Caption="@Localizer["zip"]" TextAlignment="TextAlignment.Left" />
         <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Town)" Caption="@Localizer["town"]" TextAlignment="TextAlignment.Justified" />*@
         <DataGridColumn TItem="Cautionem.Models.Customer" Field="@nameof(Cautionem.Models.Customer.Email)" Caption="@Localizer["email"]" TextAlignment="TextAlignment.Justified" />
-
     </DataGrid>
 </div>
 
@@ -28,8 +27,6 @@
     {
         //myBlocker.Show();
         customers = await customerService.GetAll(1);
-        int i = customers.Count();
-        //myBlocker.Hide();
     }
 
     async Task NotifySelection(DataGridRowMouseEventArgs<Cautionem.Models.Customer> e)

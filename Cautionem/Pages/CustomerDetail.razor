@@ -3,9 +3,9 @@
 @using System.Linq
 
 @inject Cautionem.Data.CustomerService customerService
-@inject IStringLocalizer<Customer> Localizer
+@inject IStringLocalizer<Components.Customer> Localizer
 
-DEFINICIÓN DE CLIENTE
+<h1>@Localizer["customeredit"]</h1>
 <div>
     <Addons>
         <Addon AddonType="AddonType.Start">
