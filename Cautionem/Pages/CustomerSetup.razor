@@ -5,9 +5,12 @@
 @inject Cautionem.Data.CustomerService customerService
 @inject IStringLocalizer<Components.Customer> Localizer
 
-<CustomerSearch OnCustomerSelected=@OnCustomerSelected/>
-<CustomerDetail parCustomer=parCustomer></CustomerDetail>
-<CustomerContacts parCustomer=parCustomer></CustomerContacts>
+<CustomerSearch OnCustomerSelected=@OnCustomerSelected />
+@if (ShowDetail)
+{
+    <CustomerDetail parCustomer=parCustomer></CustomerDetail>
+    
+}
 
 @code{
     protected Models.Customer parCustomer = new Models.Customer();
@@ -28,7 +31,6 @@
     {
         ShowDetail = true;
         parCustomer = customer;
-        //modalWindowEdit.Show();
     }
 
     private async void Delete()
