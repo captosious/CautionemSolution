@@ -2,7 +2,7 @@
 @using Cautionem.Models
 @using System.Linq
 
-@inject Cautionem.Data.CustomerService customerService
+@inject Cautionem.Data.CustomerContactService customerContactService
 @inject IStringLocalizer<Customer> Localizer
 
 <div>
@@ -22,9 +22,6 @@
     [Parameter]
     public Models.Customer parCustomer { get; set; }
 
-    private Cautionem.Models.Customer customerEdit = new Cautionem.Models.Customer();
-    private IEnumerable<Cautionem.Models.Customer> customers = new List<Cautionem.Models.Customer>();
-
     private Cautionem.Models.CustomerContact customerContactEdit = new Cautionem.Models.CustomerContact();
     private IEnumerable<Cautionem.Models.CustomerContact> customersContacts = new List<Cautionem.Models.CustomerContact>();
 
@@ -36,20 +33,20 @@
     protected override async Task OnInitializedAsync()
     {
         myBlocker.Show();
-        customers = await customerService.GetAll(1);
+        customersContacts = await customerContactService.Get(parCustomer);
         myBlocker.Hide();
     }
 
-    private void Edit(Cautionem.Models.Customer customer)
+    private void Edit(Cautionem.Models.CustomerContact customerContact)
     {
-        this.customerEdit = customer;
+        this.customerContactEdit = customerContact;
         modalCustomer.Show();
     }
 
     private async void Save()
     {
         myBlocker.Show();
-        await customerService.Save(customerEdit);
+        await customerContactService.Save(customerContactEdit);
         myBlocker.Hide();
     }
 
@@ -66,7 +63,7 @@
 
     private void OnClosing(CancelEventArgs e)
     {
-        customerService.Detach(customerEdit);
+        customerContactService.Detach(customerContactEdit);
         e.Cancel = false;
         IsNew = false;
         StateHasChanged();

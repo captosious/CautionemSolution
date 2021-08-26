@@ -22,19 +22,12 @@ namespace Cautionem.Data
 
         public async Task<IEnumerable<Customer>> GetAll(int intCompanyID)
         {
-            IEnumerable<Customer> list;
-
             try {
-                //list = (IEnumerable<Customer>)cautionemContext.Customers.AsEnumerable().Where(x => x.CompanyId == companyId);
-                //list = (IEnumerable<Customer>)cautionemContext.Customers.Where<Customer>(x => x.CompanyId == intCompanyID);
                 return await Task.FromResult((IEnumerable<Customer>)cautionemContext.Customers.AsEnumerable().Where(x => x.CompanyId == intCompanyID));
-                //return (list);
             }
             catch {
                 return null;
             }
-
-            
         }
 
         public async Task<Customer> Get(int companyId)
@@ -51,11 +44,7 @@ namespace Cautionem.Data
         public async Task Save(Customer customer)
         {
             cautionemContext.Entry(customer).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            //cautionemContext.Bank.Update(bank);
-            //if (cautionemContext.ModelState.IsValid)
-            //{
             await cautionemContext.SaveChangesAsync();
-            //}
         }
 
         public void Detach(Customer customer)
