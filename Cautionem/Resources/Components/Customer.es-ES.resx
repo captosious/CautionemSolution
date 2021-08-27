@@ -17,13 +17,17 @@
     </resheader>
     
     <!-- messages -->
-    
+
+    <data name="configcustomer" xml:space="preserve">
+        <value>Configuración de Clientes</value>
+    </data>
+
     <data name="customers" xml:space="preserve">
         <value>Clientes</value>
     </data>
     
     <data name="customeredit" xml:space="preserve">
-        <value>Edición de Clientes</value>
+        <value>Edición de Cliente</value>
     </data>
     
     <data name="name" xml:space="preserve">

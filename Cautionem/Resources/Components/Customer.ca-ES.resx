@@ -14,7 +14,11 @@
     </resheader>
     
     <!-- messages -->
-    
+
+   <data name="configcustomer" xml:space="preserve">
+        <value>Configuració Clients</value>
+    </data>
+
     <data name="customers" xml:space="preserve">
         <value>Clients</value>
     </data>

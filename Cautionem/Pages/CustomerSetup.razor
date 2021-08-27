@@ -5,11 +5,14 @@
 @inject Cautionem.Data.CustomerService customerService
 @inject IStringLocalizer<Components.Customer> Localizer
 
+<h1>@Localizer["configcustomer"]</h1>
+
 <CustomerSearch OnCustomerSelected=@OnCustomerSelected />
+
 @if (ShowDetail)
 {
-    <CustomerDetail parCustomer=parCustomer></CustomerDetail>
-
+    <CustomerDetail parCustomer=parCustomer/>
+    <CustomerContacts parCustomer=parCustomer/>
 }
 
 @code{

@@ -5,8 +5,14 @@ using System.Collections.Generic;
 
 namespace Cautionem.Models
 {
+
     public partial class CustomerContact
     {
+        public CustomerContact()
+        {
+            //Id = null;
+        }
+
         public int CompanyId { get; set; }
         public int CustomerId { get; set; }
         public int Id { get; set; }
@@ -19,5 +25,6 @@ namespace Cautionem.Models
         public string Email { get; set; }
 
         public virtual Customer C { get; set; }
+
     }
 }

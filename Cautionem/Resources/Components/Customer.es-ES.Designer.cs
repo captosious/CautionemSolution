@@ -47,6 +47,12 @@ namespace Cautionem.Resources.Components {
             }
         }
         
+        internal static string configcustomer {
+            get {
+                return ResourceManager.GetString("configcustomer", resourceCulture);
+            }
+        }
+        
         internal static string customers {
             get {
                 return ResourceManager.GetString("customers", resourceCulture);

@@ -3,12 +3,13 @@
 @using System.Linq
 
 @inject Cautionem.Data.CustomerContactService customerContactService
-@inject IStringLocalizer<Customer> Localizer
+@inject IStringLocalizer<Components.Customer> Localizer
 
+<h2>@Localizer["customercontacts"]</h2>
 <div>
-    <h2>@Localizer["customercontacts"]</h2>
+
     <DataGrid TItem="Cautionem.Models.CustomerContact" Data="@customersContacts" @bind-SelectedRow="@customerContactEdit" RowClicked="@RowClicking" Editable="false" Filterable="true" Sortable="true" ShowPager="true" PageSize="10" Narrow="true" Hoverable="true">
-        <DataGridCommandColumn TItem="Cautionem.Models.Customer" />
+        <DataGridCommandColumn TItem="Cautionem.Models.CustomerContact" />
 
         <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Id)" Caption="@Localizer["fiscalid"]" TextAlignment="TextAlignment.Left" />
         <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Name)" Caption="@Localizer["name"]" TextAlignment="TextAlignment.Justified" />
@@ -18,6 +19,98 @@
     </DataGrid>
 </div>
 
+@if (ShowDetail)
+{
+    <div>
+        <Addons>
+            <Addon AddonType="AddonType.Start">
+                <AddonLabel Class="addonlabel_style">@Localizer["name"]</AddonLabel>
+            </Addon>
+            <Addon AddonType="AddonType.Body">
+                <Addon AddonType="AddonType.Body">
+                    <TextEdit @bind-Text="@customerContactEdit.Name" />
+                </Addon>
+            </Addon>
+        </Addons>
+    </div>
+    <div>
+        <Addons>
+            <Addon AddonType="AddonType.Start">
+                <AddonLabel Class="addonlabel_style">@Localizer["address"]</AddonLabel>
+            </Addon>
+            <Addon AddonType="AddonType.Body">
+                <Addon AddonType="AddonType.Body">
+                    <TextEdit @bind-Text="@customerContactEdit.Address" />
+                </Addon>
+            </Addon>
+        </Addons>
+    </div>
+    <div>
+        <Addons>
+            <Addon AddonType="AddonType.Start">
+                <AddonLabel Class="addonlabel_style">@Localizer["town"]</AddonLabel>
+            </Addon>
+            <Addon AddonType="AddonType.Body">
+                <Addon AddonType="AddonType.Body">
+                    <TextEdit @bind-Text="@customerContactEdit.Town" />
+                </Addon>
+            </Addon>
+        </Addons>
+    </div>
+    <div>
+        <Addons>
+            <Addon AddonType="AddonType.Start">
+                <AddonLabel Class="addonlabel_style">@Localizer["zip"]</AddonLabel>
+            </Addon>
+            <Addon AddonType="AddonType.Body">
+                <Addon AddonType="AddonType.Body">
+                    <TextEdit @bind-Text="@customerContactEdit.Zip" />
+                </Addon>
+            </Addon>
+        </Addons>
+    </div>
+    <div>
+        <Addons>
+            <Addon AddonType="AddonType.Start">
+                <AddonLabel Class="addonlabel_style">@Localizer["phone"]</AddonLabel>
+            </Addon>
+            <Addon AddonType="AddonType.Body">
+                <Addon AddonType="AddonType.Body">
+                    <TextEdit @bind-Text="@customerContactEdit.Phone" />
+                </Addon>
+            </Addon>
+        </Addons>
+    </div>
+    <div>
+        <Addons>
+            <Addon AddonType="AddonType.Start">
+                <AddonLabel Class="addonlabel_style">@Localizer["email"]</AddonLabel>
+            </Addon>
+            <Addon AddonType="AddonType.Body">
+                <Addon AddonType="AddonType.Body">
+                    <TextEdit @bind-Text="@customerContactEdit.Email" />
+                </Addon>
+            </Addon>
+        </Addons>
+    </div>
+    <div>
+        <Addons>
+            <Addon AddonType="AddonType.Start">
+                <AddonLabel Class="addonlabel_style">@Localizer["country"]</AddonLabel>
+            </Addon>
+            <Addon AddonType="AddonType.Body">
+                <Addon AddonType="AddonType.Body">
+                    <TextEdit @bind-Text="@customerContactEdit.CountryId" />
+                </Addon>
+            </Addon>
+        </Addons>
+    </div>
+    
+    <button class="btn btn_general btn-warning" @onclick="DeleteCustomerContact">@SharedLocalizer["MSG_DELETE"]</button>
+    <button class="btn btn_general btn-success" @onclick="SaveCustomerContact">@SharedLocalizer["MSG_SAVE"]</button>
+}
+<button class="btn btn_general btn-danger" @onclick="NewCustomerContact">@SharedLocalizer["MSG_ADD"]</button>
+
 @code{
     [Parameter]
     public Models.Customer parCustomer { get; set; }
@@ -25,54 +118,14 @@
     private Cautionem.Models.CustomerContact customerContactEdit = new Cautionem.Models.CustomerContact();
     private IEnumerable<Cautionem.Models.CustomerContact> customersContacts = new List<Cautionem.Models.CustomerContact>();
 
-    //Modal
-    private Modal modalCustomer;
     private bool IsNew = false;
     private bool ShowDetail = false;
 
     protected override async Task OnInitializedAsync()
     {
         myBlocker.Show();
-        customersContacts = await customerContactService.Get(parCustomer);
+        customersContacts = await customerContactService.GetAll(parCustomer);
         myBlocker.Hide();
-    }
-
-    private void Edit(Cautionem.Models.CustomerContact customerContact)
-    {
-        this.customerContactEdit = customerContact;
-        modalCustomer.Show();
-    }
-
-    private async void Save()
-    {
-        myBlocker.Show();
-        await customerContactService.Save(customerContactEdit);
-        myBlocker.Hide();
-    }
-
-    // Modal Contacts
-    private void CloseModal()
-    {
-        modalCustomer.Hide();
-    }
-
-    private void OpenModal()
-    {
-        modalCustomer.Show();
-    }
-
-    private void OnClosing(CancelEventArgs e)
-    {
-        customerContactService.Detach(customerContactEdit);
-        e.Cancel = false;
-        IsNew = false;
-        StateHasChanged();
-    }
-
-    async Task OnReadData(DataGridReadDataEventArgs<Cautionem.Models.Customer> e)
-    {
-        customers = await customerService.GetAll(1);
-        StateHasChanged();
     }
 
     protected void RowClicking()
@@ -80,5 +133,33 @@
         //modalCustomer.Show();
         ShowDetail = true;
         StateHasChanged();
+    }
+
+    protected void NewCustomerContact()
+    {
+        customerContactEdit = new CustomerContact();
+        customerContactEdit.CompanyId = 1;
+        customerContactEdit.CustomerId = int.Parse(parCustomer.CustomerId.ToString());
+        ShowDetail = true;
+        IsNew = true;
+        StateHasChanged();
+    }
+
+    protected void DeleteCustomerContact()
+    {
+
+    }
+
+    protected async void SaveCustomerContact()
+    {
+        if (IsNew)
+        {
+            await customerContactService.Add(customerContactEdit);
+        }   
+        else
+        {
+            await customerContactService.Save(customerContactEdit);
+        }
+        IsNew = false;
     }
 }

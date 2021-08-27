@@ -20,7 +20,7 @@ namespace Cautionem.Data
             this.cautionemContext = cautionemContext;
         }
 
-        public async Task<IEnumerable<CustomerContact>> Get(Customer customer)
+        public async Task<IEnumerable<CustomerContact>> GetAll(Customer customer)
         {
             try
             {

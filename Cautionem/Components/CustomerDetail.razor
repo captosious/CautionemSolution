@@ -5,7 +5,7 @@
 @inject Cautionem.Data.CustomerService customerService
 @inject IStringLocalizer<Components.Customer> Localizer
 
-<h1>@Localizer["customeredit"]</h1>
+<h2>@Localizer["customeredit"]</h2>
 <div>
     <Addons>
         <Addon AddonType="AddonType.Start">
@@ -102,9 +102,8 @@
         </Addon>
     </Addons>
 </div>
-<button class="btn btn_general btn-success" @onclick="Save">@SharedLocalizer["MSG_SAVE"]</button>
 
-<CustomerContacts parCustomer=parCustomer></CustomerContacts>
+<button class="btn btn_general btn-success" @onclick="Save">@SharedLocalizer["MSG_SAVE"]</button>
 
 @code{
     [Parameter]
