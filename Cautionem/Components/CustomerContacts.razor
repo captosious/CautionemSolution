@@ -16,7 +16,7 @@
     </DataGrid>
 </div>
 
-@if (ShowDetail)
+@if(ShowDetail)
 {
     <div>
         <Addons>
@@ -106,6 +106,7 @@
     <button class="btn btn_general btn-warning" @onclick="DeleteCustomerContact">@SharedLocalizer["MSG_DELETE"]</button>
     <button class="btn btn_general btn-success" @onclick="SaveCustomerContact">@SharedLocalizer["MSG_SAVE"]</button>
 }
+
 @if (true)
 {
     <button class="btn btn_general btn-danger" @onclick="NewCustomerContact">@SharedLocalizer["MSG_ADD"]</button>
@@ -133,8 +134,8 @@
     public override async Task SetParametersAsync(ParameterView parameters)
     {
 
-        @*ShowDetail = false;
-        customersContacts = await customerContactService.GetAll(parCustomer);*@
+        //ShowDetail = false;
+        //customersContacts = await customerContactService.GetAll(parCustomer);
         //myBlocker.Hide();
     }
 
