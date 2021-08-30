@@ -7,15 +7,12 @@
 
 <h2>@Localizer["customercontacts"]</h2>
 <div>
-
     <DataGrid TItem="Cautionem.Models.CustomerContact" Data="@customersContacts" @bind-SelectedRow="@customerContactEdit" RowClicked="@RowClicking" Editable="false" Filterable="true" Sortable="true" ShowPager="true" PageSize="10" Narrow="true" Hoverable="true">
         <DataGridCommandColumn TItem="Cautionem.Models.CustomerContact" />
 
-        @*<DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Id)" Caption="@Localizer["fiscalid"]" TextAlignment="TextAlignment.Left" />*@
         <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Name)" Caption="@Localizer["name"]" TextAlignment="TextAlignment.Justified" />
         <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Email)" Caption="@Localizer["email"]" TextAlignment="TextAlignment.Justified" />
         <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Phone)" Caption="@Localizer["phone"]" TextAlignment="TextAlignment.Justified" />
-        
     </DataGrid>
 </div>
 
