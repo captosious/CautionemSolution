@@ -11,11 +11,11 @@
     <DataGrid TItem="Cautionem.Models.CustomerContact" Data="@customersContacts" @bind-SelectedRow="@customerContactEdit" RowClicked="@RowClicking" Editable="false" Filterable="true" Sortable="true" ShowPager="true" PageSize="10" Narrow="true" Hoverable="true">
         <DataGridCommandColumn TItem="Cautionem.Models.CustomerContact" />
 
-        <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Id)" Caption="@Localizer["fiscalid"]" TextAlignment="TextAlignment.Left" />
+        @*<DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Id)" Caption="@Localizer["fiscalid"]" TextAlignment="TextAlignment.Left" />*@
         <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Name)" Caption="@Localizer["name"]" TextAlignment="TextAlignment.Justified" />
-        <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Address)" Caption="@Localizer["address"]" TextAlignment="TextAlignment.Justified" />
-        <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Town)" Caption="@Localizer["town"]" TextAlignment="TextAlignment.Justified" />
-        <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Zip)" Caption="@Localizer["zip"]" TextAlignment="TextAlignment.Left" />
+        <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Email)" Caption="@Localizer["email"]" TextAlignment="TextAlignment.Justified" />
+        <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Phone)" Caption="@Localizer["phone"]" TextAlignment="TextAlignment.Justified" />
+        
     </DataGrid>
 </div>
 
@@ -109,13 +109,18 @@
     <button class="btn btn_general btn-warning" @onclick="DeleteCustomerContact">@SharedLocalizer["MSG_DELETE"]</button>
     <button class="btn btn_general btn-success" @onclick="SaveCustomerContact">@SharedLocalizer["MSG_SAVE"]</button>
 }
-<button class="btn btn_general btn-danger" @onclick="NewCustomerContact">@SharedLocalizer["MSG_ADD"]</button>
+@if (true)
+{
+    <button class="btn btn_general btn-danger" @onclick="NewCustomerContact">@SharedLocalizer["MSG_ADD"]</button>
+}
 
 @code{
-    [Parameter]
+    [CascadingParameter]
     public Models.Customer parCustomer { get; set; }
 
     private Cautionem.Models.CustomerContact customerContactEdit = new Cautionem.Models.CustomerContact();
+    
+    //public IEnumerable<Cautionem.Models.CustomerContact> customersContacts { get; set; }
     private IEnumerable<Cautionem.Models.CustomerContact> customersContacts = new List<Cautionem.Models.CustomerContact>();
 
     private bool IsNew = false;
@@ -128,9 +133,16 @@
         myBlocker.Hide();
     }
 
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+
+        @*ShowDetail = false;
+        customersContacts = await customerContactService.GetAll(parCustomer);*@
+        //myBlocker.Hide();
+    }
+
     protected void RowClicking()
     {
-        //modalCustomer.Show();
         ShowDetail = true;
         StateHasChanged();
     }
@@ -147,7 +159,8 @@
 
     protected void DeleteCustomerContact()
     {
-
+        customerContactService.Delete(customerContactEdit);
+        //StateHasChanged();
     }
 
     protected async void SaveCustomerContact()
@@ -155,7 +168,8 @@
         if (IsNew)
         {
             await customerContactService.Add(customerContactEdit);
-        }   
+            StateHasChanged();
+        }
         else
         {
             await customerContactService.Save(customerContactEdit);

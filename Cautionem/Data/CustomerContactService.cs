@@ -48,5 +48,14 @@ namespace Cautionem.Data
         {
             cautionemContext.Entry(customerContact).CurrentValues.SetValues(cautionemContext.Entry(customerContact).OriginalValues);
         }
+
+        public void Delete(CustomerContact customerContact)
+        {
+            CustomerContact cuTemp = new CustomerContact();
+
+            cuTemp = cautionemContext.CustomerContacts.First(x => x.CompanyId == customerContact.CompanyId && x.CustomerId == customerContact.CustomerId && x.Id == customerContact.Id);
+            cautionemContext.CustomerContacts.Remove(cuTemp);
+            cautionemContext.SaveChanges();
+        }
     }
 }

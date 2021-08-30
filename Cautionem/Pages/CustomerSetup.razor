@@ -2,8 +2,10 @@
 @using Cautionem.Models
 @using System.Linq
 
-@inject Cautionem.Data.CustomerService customerService
 @inject IStringLocalizer<Components.Customer> Localizer
+
+@inject Cautionem.Data.CustomerService customerService
+@inject Cautionem.Data.CustomerContactService customerContactService
 
 <h1>@Localizer["configcustomer"]</h1>
 
@@ -11,8 +13,10 @@
 
 @if (ShowDetail)
 {
-    <CustomerDetail parCustomer=parCustomer/>
-    <CustomerContacts parCustomer=parCustomer/>
+    <CascadingValue Value=parCustomer>
+        <CustomerDetail />
+        <CustomerContacts />
+    </CascadingValue>
 }
 
 @code{
@@ -23,6 +27,7 @@
     private bool IsNew = false;
     private bool ShowDetail = false;
     private string modalTitle;
+    protected IEnumerable<Cautionem.Models.CustomerContact> customersContacts = new List<Cautionem.Models.CustomerContact>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -30,10 +35,11 @@
         ShowDetail = false;
     }
 
-    private void OnCustomerSelected(Models.Customer customer)
+    private async void OnCustomerSelected(Models.Customer customer)
     {
         ShowDetail = true;
         parCustomer = customer;
+        //customersContacts = await customerContactService.GetAll(parCustomer);
     }
 
     private async void Delete()

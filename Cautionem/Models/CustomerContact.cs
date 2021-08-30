@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -15,6 +17,7 @@ namespace Cautionem.Models
 
         public int CompanyId { get; set; }
         public int CustomerId { get; set; }
+        [Key][System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(                                                                                                                                                                                                                                                           DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }

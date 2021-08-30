@@ -106,7 +106,7 @@
 <button class="btn btn_general btn-success" @onclick="Save">@SharedLocalizer["MSG_SAVE"]</button>
 
 @code{
-    [Parameter]
+    [CascadingParameter]
     public Models.Customer parCustomer { get; set ; }
 
     private async void Save()
