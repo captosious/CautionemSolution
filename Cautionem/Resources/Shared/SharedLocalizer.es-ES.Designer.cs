@@ -160,5 +160,23 @@ namespace Cautionem.Resources.Shared {
                 return ResourceManager.GetString("login", resourceCulture);
             }
         }
+        
+        internal static string username {
+            get {
+                return ResourceManager.GetString("username", resourceCulture);
+            }
+        }
+        
+        internal static string password {
+            get {
+                return ResourceManager.GetString("password", resourceCulture);
+            }
+        }
+        
+        internal static string validation {
+            get {
+                return ResourceManager.GetString("validation", resourceCulture);
+            }
+        }
     }
 }

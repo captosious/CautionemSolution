@@ -91,7 +91,21 @@
         <value>Contactes Clients</value>
     </data>
 
+    <!-- Login -->
+
     <data name="login" xml:space="preserve">
-        <value>Validació</value>
+        <value>Validació d'usuari</value>
+    </data>
+
+    <data name="username" xml:space="preserve">
+        <value>Usuari</value>
+    </data>
+
+    <data name="password" xml:space="preserve">
+        <value>Contrasenya</value>
+    </data>
+
+    <data name="validation" xml:space="preserve">
+        <value>Validar</value>
     </data>
 </root>

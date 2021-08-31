@@ -75,6 +75,7 @@
     </data>
     
     <!-- Redirecció de pàgina -->
+
     <data name="home" xml:space="preserve">
         <value>Inicio</value>
     </data>
@@ -91,7 +92,21 @@
         <value>Contactos Clientes</value>
     </data>
 
+    <!-- Login -->
+
     <data name="login" xml:space="preserve">
-        <value>Validació</value>
+        <value>Validación de usuari</value>
+    </data>
+
+    <data name="username" xml:space="preserve">
+        <value>Usuario</value>
+    </data>
+
+    <data name="password" xml:space="preserve">
+        <value>Contraseña</value>
+    </data>
+
+    <data name="validation" xml:space="preserve">
+        <value>Entrar</value>
     </data>
 </root>
