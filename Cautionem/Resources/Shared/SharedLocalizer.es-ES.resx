@@ -74,7 +74,7 @@
         <value>Lo sentimos, pero no hay nada en esta página.</value>
     </data>
     
-    <!-- Errades de redirecció de pàgina -->
+    <!-- Redirecció de pàgina -->
     <data name="home" xml:space="preserve">
         <value>Inicio</value>
     </data>
@@ -89,5 +89,9 @@
 
     <data name="customercontact" xml:space="preserve">
         <value>Contactos Clientes</value>
+    </data>
+
+    <data name="login" xml:space="preserve">
+        <value>Validació</value>
     </data>
 </root>

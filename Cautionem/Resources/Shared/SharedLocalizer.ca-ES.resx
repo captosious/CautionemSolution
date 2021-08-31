@@ -90,4 +90,8 @@
     <data name="customercontact" xml:space="preserve">
         <value>Contactes Clients</value>
     </data>
+
+    <data name="login" xml:space="preserve">
+        <value>Validació</value>
+    </data>
 </root>
