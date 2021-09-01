@@ -5,30 +5,40 @@
 @inject Cautionem.Data.CompanyService companyService
 @inject IStringLocalizer<CompanySetup> Localizer
 
-    <div class="container">
-        <h3>@Localizer["ConfigSetup"]</h3>
-        <div class="row">
-            <div class="col-md column_style"><Company></Company></div>
-            <div class="col-md column_style"><Bank></Bank></div>
-        </div>
-        <div class="row">
-            <div class="col-md column_style"><PaymentType></PaymentType></div>
-            <div class="col column_style"></div>
-        </div>
+
+    <AuthorizeView>
+        <Authorized>
+            <div class="container">
+                <h3>@Localizer["ConfigSetup"]</h3>
+                <div class="row">
+                    <div class="col-md column_style"><Company></Company></div>
+                    <div class="col-md column_style"><Bank></Bank></div>
+                </div>
+                <div class="row">
+                    <div class="col-md column_style"><PaymentType></PaymentType></div>
+                    <div class="col column_style"></div>
+                </div>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <NotAuthorizedPage />
+        </NotAuthorized>
+    </AuthorizeView>
+    
         @*<div class="row">
-            <div class="col-md column_style"><Customer></Customer></div>
-        </div>*@
-    </div>
+                <div class="col-md column_style"><Customer></Customer></div>
+            </div>*@
+   
 
-@code
+    @code
 {
-    protected override void OnInitialized()
-    {
-        myBlocker.Show();
-    }
+        protected override void OnInitialized()
+        {
+            myBlocker.Show();
+        }
 
-    protected void OnAfterRender()
-    {
-        myBlocker.Hide();
+        protected void OnAfterRender()
+        {
+            myBlocker.Hide();
+        }
     }
-}

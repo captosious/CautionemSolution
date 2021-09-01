@@ -61,6 +61,7 @@ namespace Cautionem
             services.AddTransient<CustomerService>();
             services.AddTransient<CustomerContactService>();
             services.AddScoped<AccessService>();
+            services.AddScoped<CustomAuthenticationStateProvider>();
 
             // Add LocalLanguages.
             services.AddLocalization(options => options.ResourcesPath = "Resources");

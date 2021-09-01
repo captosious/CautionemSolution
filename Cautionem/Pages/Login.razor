@@ -13,16 +13,16 @@
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" name="usernametext" class="form-control input_user" value="" placeholder="@SharedLocalizer["username"]">
+                        <input type="text" name="usernametext" @bind="Username" class="form-control input_user" placeholder="@SharedLocalizer["username"]">
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" name="passwordtext" class="form-control input_pass" value="" placeholder="@SharedLocalizer["password"]">
+                        <input type="password" name="passwordtext" @bind="Password" class="form-control input_pass" placeholder="@SharedLocalizer["password"]"/>
                     </div>
                     <div class="d-flex justify-content-center mt-3 login_container">
-                        <button type="button" name="button" class="btn login_btn">@SharedLocalizer["login"]</button>
+                        <button type="button" name="button" class="btn login_btn" @onclick=LogInMe>@SharedLocalizer["login"]</button>
                     </div>
                 </form>
             </div>
@@ -32,22 +32,20 @@
 
 @code{
 
-
-
+    private string Username { get; set; }
+    private string Password { get; set; }
 
     private async void LogInMe()
     {
         int return_code;
 
         myBlocker.Show();
-        Task<int> loginTask = accessService.LogInAsync("", "");
+        Task<int> loginTask = accessService.LogInAsync(Username, Password);
 
         return_code = await loginTask;
         switch (loginTask.Result)
         {
             case 0:
-                //CompleteUserName = accessService.MyLogin.Name + " " + accessService.MyLogin.FamilyName;
-
                 @*if (accessService.MyLogin.Image is null)
                     {
                         //UserPhoto = "";
@@ -56,24 +54,28 @@
                     {
                         //UserPhoto = "data:image/jpg;base64," + Convert.ToBase64String(accessService.MyLogin.Image, 0, accessService.MyLogin.Image.Length);
                     }*@
-                //toastService.ShowSuccess(SharedLocalizer["LOGIN_SUCCESS"], SharedLocalizer["LOGIN_TITLE"]);
-                break;
+                toastService.ShowSuccess(SharedLocalizer["LOGIN_SUCCESS"], SharedLocalizer["LOGIN_TITLE"]);
+            break;
             case 1:
                 //CompleteUserName = "";
-                //toastService.ShowError(SharedLocalizer["LOGIN_CREDENTIALS_ERROR"], SharedLocalizer["LOGIN_TITLE_ERROR"]);
-                break;
+                 toastService.ShowError(SharedLocalizer["LOGIN_CREDENTIALS_ERROR"], SharedLocalizer["LOGIN_TITLE_ERROR"]);
+            break;
             case 2:
                 //CompleteUserName = "";
-                //toastService.ShowError(SharedLocalizer["CONNECTION_ERROR"], SharedLocalizer["TITLE_CONNECTION_ERROR"]);
-                break;
-        }
-        StateHasChanged();
-        myBlocker.Hide();
+                toastService.ShowError(SharedLocalizer["CONNECTION_ERROR"], SharedLocalizer["TITLE_CONNECTION_ERROR"]);
+            break;
+            case 3:
+                //CompleteUserName = "";
+                toastService.ShowError(SharedLocalizer["LOGIN_CREDENTIALS_ERROR"], SharedLocalizer["LOGIN_TITLE_ERROR"]);
+            break;
     }
+    StateHasChanged();
+    myBlocker.Hide();
+}
 
-    private async void LogOutMe()
-    {
-        await accessService.LogOut();
-        Navigation.NavigateTo("/");
-    }
+private async void LogOutMe()
+{
+    await accessService.LogOut();
+    Navigation.NavigateTo("/");
+}
 }

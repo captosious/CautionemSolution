@@ -108,4 +108,32 @@
     <data name="validation" xml:space="preserve">
         <value>Validar</value>
     </data>
+
+    <data name="LOGIN_SUCCESS" xml:space="preserve">
+        <value></value>
+    </data>
+
+    <data name="LOGIN_CREDENTIALS_ERROR" xml:space="preserve">
+        <value>Error de credencials</value>
+    </data>
+
+    <data name="CONNECTION_ERROR" xml:space="preserve">
+        <value>No es pot connectar al servei en aquests moments</value>
+    </data>
+
+     <data name="LOGIN_TITLE" xml:space="preserve">
+        <value>Validació</value>
+    </data>
+
+    <data name="LOGIN_TITLE_ERROR" xml:space="preserve">
+        <value>Error validació</value>
+    </data>
+
+    <data name="TITLE_CONNECTION_ERROR" xml:space="preserve">
+        <value>Error de connexió</value>
+    </data>
+
+    <data name="LOGIN_NOT_LOGGED" xml:space="preserve">
+        <value>Valideu-vos abans de fer ús del sistema</value>
+    </data>
 </root>
