@@ -21,6 +21,7 @@ using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System.Security.Claims;
 using Blazored.Toast;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Cautionem
 {
@@ -74,6 +75,13 @@ namespace Cautionem
                 .AddBootstrapProviders()
                 .AddFontAwesomeIcons();
 
+            //Autho & Authen
+            services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+            services.AddAuthentication(options =>
+            {
+
+            }
+            );
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("administrator", policy => policy.RequireClaim(ClaimTypes.Role, "0"));
