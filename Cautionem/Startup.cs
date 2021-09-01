@@ -51,6 +51,7 @@ namespace Cautionem
             services.AddSingleton<MyAppSettings>();
             services.AddSingleton<SharedLocalizer>();
             // Services
+            services.AddScoped<Login>();
             services.AddScoped<CompanyService>();
             services.AddScoped<BankService>();
             services.AddScoped<PaymentTypeService>();
@@ -67,6 +68,15 @@ namespace Cautionem
             })
                 .AddBootstrapProviders()
                 .AddFontAwesomeIcons();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("administrator", policy => policy.RequireClaim(ClaimTypes.Role, "0"));
+                options.AddPolicy("manager", policy => policy.RequireClaim(ClaimTypes.Role, "1"));
+                options.AddPolicy("operator", policy => policy.RequireClaim(ClaimTypes.Role, "2"));
+                options.AddPolicy("guest", policy => policy.RequireClaim(ClaimTypes.Role, "3"));
+            }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,7 +112,7 @@ namespace Cautionem
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();

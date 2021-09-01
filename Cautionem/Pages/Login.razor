@@ -25,3 +25,51 @@
         </div>
     </div>
 </div>
+
+@code{
+
+
+
+
+    private async void LogInMe()
+    {
+        int return_code;
+
+        myBlocker.Show();
+        Task<int> loginTask = AccessService.LogInAsync(UserName, Password);
+
+        return_code = await loginTask;
+        switch (loginTask.Result)
+        {
+            case 0:
+                CompleteUserName = AccessService.MyLogin.Name + " " + AccessService.MyLogin.FamilyName;
+
+                if (AccessService.MyLogin.Image is null)
+                {
+                    UserPhoto = "";
+                }
+                else
+                {
+                    UserPhoto = "data:image/jpg;base64," + Convert.ToBase64String(AccessService.MyLogin.Image, 0, AccessService.MyLogin.Image.Length);
+                }
+                toastService.ShowSuccess(SharedLocalizer["LOGIN_SUCCESS"], SharedLocalizer["LOGIN_TITLE"]);
+                break;
+            case 1:
+                CompleteUserName = "";
+                toastService.ShowError(SharedLocalizer["LOGIN_CREDENTIALS_ERROR"], SharedLocalizer["LOGIN_TITLE_ERROR"]);
+                break;
+            case 2:
+                CompleteUserName = "";
+                toastService.ShowError(SharedLocalizer["CONNECTION_ERROR"], SharedLocalizer["TITLE_CONNECTION_ERROR"]);
+                break;
+        }
+        StateHasChanged();
+        myBlocker.Hide();
+    }
+
+    private async void LogOutMe()
+    {
+        await AccessService.LogOut();
+        Navigation.NavigateTo("/");
+    }
+}

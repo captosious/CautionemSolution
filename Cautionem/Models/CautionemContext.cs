@@ -511,6 +511,9 @@ namespace Cautionem.Models
                     .HasMaxLength(45)
                     .HasColumnName("password");
 
+                entity.Property(e => e.SecurityId)
+                    .HasColumnName("security_id");
+
                 entity.Property(e => e.Picture)
                     .HasColumnType("blob")
                     .HasColumnName("picture");
