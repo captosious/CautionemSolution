@@ -19,6 +19,8 @@ using Blazorise;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System.Security.Claims;
+using Blazored.Toast;
 
 namespace Cautionem
 {
@@ -45,6 +47,7 @@ namespace Cautionem
             );
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddBlazoredToast();
             //services.AddScoped<DialogService>();
             //services.AddScoped<NotificationService>();
             // Configuration
@@ -52,11 +55,12 @@ namespace Cautionem
             services.AddSingleton<SharedLocalizer>();
             // Services
             services.AddScoped<Login>();
-            services.AddScoped<CompanyService>();
-            services.AddScoped<BankService>();
-            services.AddScoped<PaymentTypeService>();
-            services.AddScoped<CustomerService>();
-            services.AddScoped<CustomerContactService>();
+            services.AddTransient<CompanyService>();
+            services.AddTransient<BankService>();
+            services.AddTransient<PaymentTypeService>();
+            services.AddTransient<CustomerService>();
+            services.AddTransient<CustomerContactService>();
+            services.AddScoped<AccessService>();
 
             // Add LocalLanguages.
             services.AddLocalization(options => options.ResourcesPath = "Resources");

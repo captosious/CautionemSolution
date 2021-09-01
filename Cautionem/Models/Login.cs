@@ -6,8 +6,10 @@ namespace Cautionem.Models
         public int CompanyId { get; set; }
         public string Username { get; set; }
         public int Id { get; set; }
-        public string Password { get; set; }
         public string Name { get; set; }
         public string FamilyName { get; set; }
+        public string CompleteName { get; set; }
+        public string CompleteNameReverse { get; set; }
+        public int SecurityId { get; set; }
     }
 }

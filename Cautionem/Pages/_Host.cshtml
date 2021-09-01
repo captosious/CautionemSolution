@@ -27,43 +27,44 @@
 
     <link href="_content/Blazorise/blazorise.css" rel="stylesheet" />
     <link href="_content/Blazorise.Bootstrap/blazorise.bootstrap.css" rel="stylesheet" />
-
+    <!-- Toasts-->
+    <link rel="stylesheet" href="_content/Blazored.Toast/blazored-toast.css" />
     <!--<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />-->
     <link href="css/site.css" rel="stylesheet" />
     <link href="css/login.css" rel="stylesheet" />
     <!--<link rel="stylesheet" href="_content/Radzen.Blazor/css/default-base.css">-->
 </head>
-<body>
+    <body>
 
-    <app>
-        <component type="typeof(App)" render-mode="ServerPrerendered" />
-    </app>
+        <app>
+            <component type="typeof(App)" render-mode="ServerPrerendered" />
+        </app>
 
-    <div id="blazor-error-ui">
-        <environment include="Staging,Production">
-            An error has occurred. This application may no longer respond until reloaded.
-        </environment>
-        <environment include="Development">
-            An unhandled exception has occurred. See browser dev tools for details.
-        </environment>
-        <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
-    </div>
-
-    <div id="BlockerUP" style="visibility: hidden">
-        <div>
-            <p id="BlockerUpParagraph" class="blockerup">Processant,...</p>
-            <img src="img/whirl_waiting.gif" width="100" height="100">
+        <div id="blazor-error-ui">
+            <environment include="Staging,Production">
+                An error has occurred. This application may no longer respond until reloaded.
+            </environment>
+            <environment include="Development">
+                An unhandled exception has occurred. See browser dev tools for details.
+            </environment>
+            <a href="" class="reload">Reload</a>
+            <a class="dismiss">🗙</a>
         </div>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <div id="BlockerUP" style="visibility: hidden">
+            <div>
+                <p id="BlockerUpParagraph" class="blockerup">Processant,...</p>
+                <img src="img/whirl_waiting.gif" width="100" height="100">
+            </div>
+        </div>
 
-    <script src="_content/Blazorise/blazorise.js"></script>
-    <script src="_content/Blazorise.Bootstrap/blazorise.bootstrap.js"></script>
-    <script src="_framework/blazor.server.js"></script>
-    <!--<script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>-->
-</body>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+        <script src="_content/Blazorise/blazorise.js"></script>
+        <script src="_content/Blazorise.Bootstrap/blazorise.bootstrap.js"></script>
+        <script src="_framework/blazor.server.js"></script>
+        <!--<script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>-->
+    </body>
 </html>

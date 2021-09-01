@@ -12,7 +12,10 @@
 @using Cautionem.Shared
 @using Blazorise
 @using Blazorise.DataGrid
-
+@using Blazored.Toast;
+@using Blazored.Toast.Services
+@using Blazored.Toast.Configuration
 
 @inject Cautionem.Models.MyBlocker myBlocker
 @inject IStringLocalizer<SharedLocalizer> SharedLocalizer
+@inject IToastService toastService

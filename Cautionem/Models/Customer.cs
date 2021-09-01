@@ -11,11 +11,10 @@ namespace Cautionem.Models
         {
             CustomerContacts = new HashSet<CustomerContact>();
             Files = new HashSet<File>();
-            CustomerId = null;
         }
 
         public int CompanyId { get; set; }
-        public int? CustomerId { get; set; }
+        public int CustomerId { get; set; }
         public string FiscalId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }

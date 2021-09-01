@@ -1,5 +1,9 @@
 ﻿@page "/Login"
 
+@inject Cautionem.Data.AccessService accessService
+@inject AuthenticationStateProvider AuthenStateProv;
+@inject NavigationManager Navigation;
+
 <div class="container h-100">
     <div class="d-flex justify-content-center align-middle h-100">
         <div class="user_card">
@@ -9,13 +13,13 @@
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" name="" class="form-control input_user" value="" placeholder="@SharedLocalizer["username"]">
+                        <input type="text" name="usernametext" class="form-control input_user" value="" placeholder="@SharedLocalizer["username"]">
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" name="" class="form-control input_pass" value="" placeholder="@SharedLocalizer["password"]">
+                        <input type="password" name="passwordtext" class="form-control input_pass" value="" placeholder="@SharedLocalizer["password"]">
                     </div>
                     <div class="d-flex justify-content-center mt-3 login_container">
                         <button type="button" name="button" class="btn login_btn">@SharedLocalizer["login"]</button>
@@ -36,31 +40,31 @@
         int return_code;
 
         myBlocker.Show();
-        Task<int> loginTask = AccessService.LogInAsync(UserName, Password);
+        Task<int> loginTask = accessService.LogInAsync("", "");
 
         return_code = await loginTask;
         switch (loginTask.Result)
         {
             case 0:
-                CompleteUserName = AccessService.MyLogin.Name + " " + AccessService.MyLogin.FamilyName;
+                //CompleteUserName = accessService.MyLogin.Name + " " + accessService.MyLogin.FamilyName;
 
-                if (AccessService.MyLogin.Image is null)
-                {
-                    UserPhoto = "";
-                }
-                else
-                {
-                    UserPhoto = "data:image/jpg;base64," + Convert.ToBase64String(AccessService.MyLogin.Image, 0, AccessService.MyLogin.Image.Length);
-                }
-                toastService.ShowSuccess(SharedLocalizer["LOGIN_SUCCESS"], SharedLocalizer["LOGIN_TITLE"]);
+                @*if (accessService.MyLogin.Image is null)
+                    {
+                        //UserPhoto = "";
+                    }
+                    else
+                    {
+                        //UserPhoto = "data:image/jpg;base64," + Convert.ToBase64String(accessService.MyLogin.Image, 0, accessService.MyLogin.Image.Length);
+                    }*@
+                //toastService.ShowSuccess(SharedLocalizer["LOGIN_SUCCESS"], SharedLocalizer["LOGIN_TITLE"]);
                 break;
             case 1:
-                CompleteUserName = "";
-                toastService.ShowError(SharedLocalizer["LOGIN_CREDENTIALS_ERROR"], SharedLocalizer["LOGIN_TITLE_ERROR"]);
+                //CompleteUserName = "";
+                //toastService.ShowError(SharedLocalizer["LOGIN_CREDENTIALS_ERROR"], SharedLocalizer["LOGIN_TITLE_ERROR"]);
                 break;
             case 2:
-                CompleteUserName = "";
-                toastService.ShowError(SharedLocalizer["CONNECTION_ERROR"], SharedLocalizer["TITLE_CONNECTION_ERROR"]);
+                //CompleteUserName = "";
+                //toastService.ShowError(SharedLocalizer["CONNECTION_ERROR"], SharedLocalizer["TITLE_CONNECTION_ERROR"]);
                 break;
         }
         StateHasChanged();
@@ -69,7 +73,7 @@
 
     private async void LogOutMe()
     {
-        await AccessService.LogOut();
+        await accessService.LogOut();
         Navigation.NavigateTo("/");
     }
 }

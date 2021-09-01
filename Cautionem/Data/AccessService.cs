@@ -15,7 +15,7 @@ namespace Cautionem.Data
     public class AccessService
     {
         private readonly MyAppSettings _appSettings;
-        public User MyLogin { get; set; }
+        public Login MyLogin { get; set; }
         private AuthenticationStateProvider _AuthenStateProv;
         private readonly CautionemContext _cautionemContext;
 
@@ -24,29 +24,37 @@ namespace Cautionem.Data
             _appSettings = appSettings;
             _cautionemContext = cautionemContext;
             _AuthenStateProv = AuthenStateProv;
-            MyLogin = new User();
+            MyLogin = new Login();
         }
 
         public async Task<int> LogInAsync(string Username, string Password)
         {
             MyLogin.CompanyId = 1;
             MyLogin.Username = Username;
-            MyLogin.Password = Password;
-
+            
+            User user = new User();
 
             try
             {
-                MyLogin = (User)_cautionemContext.Users.FirstOrDefault(x => x.CompanyId == MyLogin.CompanyId && x.Username == MyLogin.Username);
+                user = (User)_cautionemContext.Users.FirstOrDefault(x => x.CompanyId == MyLogin.CompanyId && x.Username == MyLogin.Username);
 
-                if (MyLogin != null)
+                if (user != null)
                 {
-                    if (MyLogin.Password == Password)
+                    if (user.Password == Password)
                     {
+                        //Success Authenticated
+                        MyLogin.Id = user.Id;
+                        MyLogin.Name = user.Name;
+                        MyLogin.FamilyName = user.FamilyName;
+                        MyLogin.CompleteName = user.Name + " " + user.FamilyName;
+                        MyLogin.CompleteNameReverse = user.FamilyName + ", " + user.Name;
+                        MyLogin.SecurityId = user.SecurityId;
                         ((CustomAuthenticationStateProvider)_AuthenStateProv).MarkUserAsAuthenticated(Username, MyLogin.SecurityId.ToString());
                         return 0;
                     }
                     else
                     {
+                        //Wrong Password
                         await LogOut();
                         return 3;
                     }
@@ -69,7 +77,7 @@ namespace Cautionem.Data
         public Task<int> LogOut()
         {
             ((CustomAuthenticationStateProvider)_AuthenStateProv).MarkUserAsNotAuthenticated();
-            MyLogin = new User();
+            MyLogin = new Login();
             return Task.FromResult(0);
         }
     }

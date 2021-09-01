@@ -216,7 +216,9 @@ namespace Cautionem.Models
 
                 entity.HasIndex(e => new { e.CompanyId, e.CustomerId }, "fk_customer_contacts_customer_idx");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("id");
 
                 entity.Property(e => e.CompanyId).HasColumnName("company_id");
 
@@ -477,7 +479,7 @@ namespace Cautionem.Models
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasKey(e => new { e.Id, e.Username, e.CompanyId })
+                entity.HasKey(e => new { e.Id, e.Username })
                     .HasName("PRIMARY");
 
                 entity.ToTable("users");
@@ -511,12 +513,13 @@ namespace Cautionem.Models
                     .HasMaxLength(45)
                     .HasColumnName("password");
 
-                entity.Property(e => e.SecurityId)
-                    .HasColumnName("security_id");
-
                 entity.Property(e => e.Picture)
                     .HasColumnType("blob")
                     .HasColumnName("picture");
+
+                entity.Property(e => e.SecurityId)
+                    .HasColumnName("security_id")
+                    .HasDefaultValueSql("'3'");
 
                 entity.HasOne(d => d.Company)
                     .WithMany(p => p.Users)

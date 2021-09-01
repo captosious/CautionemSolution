@@ -27,6 +27,7 @@
     <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.4.3" />
     <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Blazored.Toast" Version="3.1.2" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resources\Pages\Company.es-ES.resx">
@@ -148,5 +149,6 @@
     <None Remove="Properties\PublishProfiles\FolderProfile 1.pubxml" />
     <None Remove="Properties\PublishProfiles\FolderProfile 5.pubxml" />
     <None Remove="Microsoft.AspNetCore.Identity" />
+    <None Remove="Blazored.Toast" />
   </ItemGroup>
 </Project>
