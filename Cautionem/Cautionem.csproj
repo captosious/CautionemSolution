@@ -15,6 +15,7 @@
     <Folder Include="Resources\Components\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\css\css_template\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.9">
@@ -139,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\img\finance_background.jpg" />
+    <Content Remove="wwwroot\css\css_template\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Properties\PublishProfiles\FolderProfile 2.pubxml" />
