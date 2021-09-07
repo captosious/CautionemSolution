@@ -7,60 +7,65 @@
 @inject Cautionem.Data.CustomerService customerService
 @inject Cautionem.Data.CustomerContactService customerContactService
 
-<h1>@Localizer["configcustomer"]</h1>
-
-<CustomerSearch OnCustomerSelected=@OnCustomerSelected />
-
-@if (ShowDetail)
-{
-    <CascadingValue Value=parCustomer>
-        <CustomerDetail />
-        <CustomerContacts />
-    </CascadingValue>
-}
-
-@code{
-    protected Models.Customer parCustomer = new Models.Customer();
-
-    //Modal Customer Edit
-    private Modal modalWindowEdit;
-    private bool IsNew = false;
-    private bool ShowDetail = false;
-    private string modalTitle;
-    protected IEnumerable<Cautionem.Models.CustomerContact> customersContacts = new List<Cautionem.Models.CustomerContact>();
-
-    protected override async Task OnInitializedAsync()
+    <div class="row">
+        <div class="col">
+            <h1>@Localizer["configcustomer"]</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <CustomerSearch OnCustomerSelected=@OnCustomerSelected />
+        </div>
+    </div>
+    @if (ShowDetail)
     {
-        //modalWindowEdit.Hide();
-        ShowDetail = false;
+        <CascadingValue Value=parCustomer>
+            <CustomerDetail />
+            <CustomerContacts />
+        </CascadingValue>
     }
+    @code{
+        protected Models.Customer parCustomer = new Models.Customer();
 
-    private async void OnCustomerSelected(Models.Customer customer)
-    {
-        ShowDetail = true;
-        parCustomer = customer;
-        //customersContacts = await customerContactService.GetAll(parCustomer);
+        //Modal Customer Edit
+        private Modal modalWindowEdit;
+        private bool IsNew = false;
+        private bool ShowDetail = false;
+        private string modalTitle;
+        protected IEnumerable<Cautionem.Models.CustomerContact> customersContacts = new List<Cautionem.Models.CustomerContact>();
+
+        protected override async Task OnInitializedAsync()
+        {
+            //modalWindowEdit.Hide();
+            ShowDetail = false;
+        }
+
+        private async void OnCustomerSelected(Models.Customer customer)
+        {
+            ShowDetail = true;
+            parCustomer = customer;
+            //customersContacts = await customerContactService.GetAll(parCustomer);
+        }
+
+        private async void Delete()
+        {
+
+        }
+
+        // Modal
+        private void CloseModal()
+        {
+            modalWindowEdit.Hide();
+        }
+
+        private void OpenModal()
+        {
+            modalWindowEdit.Show();
+        }
+
+        private void OnClosing(CancelEventArgs e)
+        {
+            StateHasChanged();
+        }
+
     }
-
-    private async void Delete()
-    {
-
-    }
-
-    // Modal
-    private void CloseModal()
-    {
-        modalWindowEdit.Hide();
-    }
-
-    private void OpenModal()
-    {
-        modalWindowEdit.Show();
-    }
-
-    private void OnClosing(CancelEventArgs e)
-    {
-        StateHasChanged();
-    }
-
-}

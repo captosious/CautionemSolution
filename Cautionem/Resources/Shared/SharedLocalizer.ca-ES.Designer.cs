@@ -220,5 +220,23 @@ namespace Cautionem.Resources.Shared {
                 return ResourceManager.GetString("LOGIN_NOT_LOGGED", resourceCulture);
             }
         }
+        
+        internal static string MENU_TOOLS {
+            get {
+                return ResourceManager.GetString("MENU_TOOLS", resourceCulture);
+            }
+        }
+        
+        internal static string MENU_BASIC_CONFIGURATION {
+            get {
+                return ResourceManager.GetString("MENU_BASIC_CONFIGURATION", resourceCulture);
+            }
+        }
+        
+        internal static string MENU_CUSTOMER_CONFIGURATION {
+            get {
+                return ResourceManager.GetString("MENU_CUSTOMER_CONFIGURATION", resourceCulture);
+            }
+        }
     }
 }

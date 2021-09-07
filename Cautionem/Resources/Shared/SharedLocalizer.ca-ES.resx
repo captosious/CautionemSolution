@@ -136,4 +136,18 @@
     <data name="LOGIN_NOT_LOGGED" xml:space="preserve">
         <value>Valideu-vos abans de fer ús del sistema</value>
     </data>
+
+    <!-- Menú -->
+    <data name="MENU_TOOLS" xml:space="preserve">
+        <value>Eines configuració</value>
+    </data>
+
+    <data name="MENU_BASIC_CONFIGURATION" xml:space="preserve">
+        <value>Bàsica</value>
+    </data>
+
+    <data name="MENU_CUSTOMER_CONFIGURATION" xml:space="preserve">
+        <value>Clients</value>
+    </data>
+
 </root>
