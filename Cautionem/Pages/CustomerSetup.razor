@@ -8,15 +8,12 @@
 @inject Cautionem.Data.CustomerContactService customerContactService
 
     <div class="row">
-        <div class="col">
-            <h1>@Localizer["configcustomer"]</h1>
-        </div>
+            <h3>@Localizer["configcustomer"]</h3>
     </div>
     <div class="row">
-        <div class="col">
             <CustomerSearch OnCustomerSelected=@OnCustomerSelected />
-        </div>
     </div>
+
     @if (ShowDetail)
     {
         <CascadingValue Value=parCustomer>
