@@ -11,5 +11,6 @@ namespace Cautionem.Models
         public string CompleteName { get; set; }
         public string CompleteNameReverse { get; set; }
         public int SecurityId { get; set; }
+        public byte[] Picture { get; set; }
     }
 }

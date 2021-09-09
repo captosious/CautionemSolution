@@ -49,6 +49,7 @@ namespace Cautionem.Data
                         MyLogin.CompleteName = user.Name + " " + user.FamilyName;
                         MyLogin.CompleteNameReverse = user.FamilyName + ", " + user.Name;
                         MyLogin.SecurityId = user.SecurityId;
+                        MyLogin.Picture = user.Picture;
                         ((CustomAuthenticationStateProvider)_AuthenStateProv).MarkUserAsAuthenticated(Username, MyLogin.SecurityId.ToString());
                         return 0;
                     }
