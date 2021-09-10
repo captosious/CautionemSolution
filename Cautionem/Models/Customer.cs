@@ -9,7 +9,6 @@ namespace Cautionem.Models
     {
         public Customer()
         {
-            CustomerContacts = new HashSet<CustomerContact>();
             Files = new HashSet<File>();
         }
 
@@ -28,7 +27,6 @@ namespace Cautionem.Models
 
         public virtual Company Company { get; set; }
         public virtual Country Country { get; set; }
-        public virtual ICollection<CustomerContact> CustomerContacts { get; set; }
         public virtual ICollection<File> Files { get; set; }
     }
 }

@@ -37,6 +37,8 @@ namespace Cautionem.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseMySQL("server=enterprise.delta.engineering;port=3306;user=roc;password=Montmany1;database=Cautionem");
             }
         }
 
@@ -212,7 +214,7 @@ namespace Cautionem.Models
                 entity.HasKey(e => new { e.Id, e.CompanyId, e.CustomerId })
                     .HasName("PRIMARY");
 
-                entity.ToTable("customer_contacts");
+                entity.ToTable("customer_contact");
 
                 entity.HasIndex(e => new { e.CompanyId, e.CustomerId }, "fk_customer_contacts_customer_idx");
 
@@ -251,12 +253,6 @@ namespace Cautionem.Models
                 entity.Property(e => e.Zip)
                     .HasMaxLength(45)
                     .HasColumnName("zip");
-
-                entity.HasOne(d => d.C)
-                    .WithMany(p => p.CustomerContacts)
-                    .HasForeignKey(d => new { d.CompanyId, d.CustomerId })
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_customer_contacts_customer1");
             });
 
             modelBuilder.Entity<File>(entity =>
@@ -482,7 +478,7 @@ namespace Cautionem.Models
                 entity.HasKey(e => new { e.Id, e.Username })
                     .HasName("PRIMARY");
 
-                entity.ToTable("users");
+                entity.ToTable("user");
 
                 entity.HasIndex(e => e.CompanyId, "fk_users_company_idx");
 
@@ -520,12 +516,6 @@ namespace Cautionem.Models
                 entity.Property(e => e.SecurityId)
                     .HasColumnName("security_id")
                     .HasDefaultValueSql("'3'");
-
-                entity.HasOne(d => d.Company)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.CompanyId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_users_company1");
             });
 
             OnModelCreatingPartial(modelBuilder);

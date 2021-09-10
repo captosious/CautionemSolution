@@ -15,7 +15,5 @@ namespace Cautionem.Models
         public string FamilyName { get; set; }
         public byte[] Picture { get; set; }
         public int SecurityId { get; set; }
-
-        public virtual Company Company { get; set; }
     }
 }

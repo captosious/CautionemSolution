@@ -14,7 +14,6 @@ namespace Cautionem.Models
             Files = new HashSet<File>();
             Items = new HashSet<Item>();
             PaymentTypes = new HashSet<PaymentType>();
-            Users = new HashSet<User>();
         }
 
         public int CompanyId { get; set; }
@@ -31,6 +30,5 @@ namespace Cautionem.Models
         public virtual ICollection<File> Files { get; set; }
         public virtual ICollection<Item> Items { get; set; }
         public virtual ICollection<PaymentType> PaymentTypes { get; set; }
-        public virtual ICollection<User> Users { get; set; }
     }
 }
