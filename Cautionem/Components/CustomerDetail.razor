@@ -6,6 +6,7 @@
 @inject IStringLocalizer<Components.Customer> Localizer
 
 <h2>@Localizer["customeredit"]</h2>
+<br />
 <div>
     <Addons>
         <Addon AddonType="AddonType.Start">
@@ -105,9 +106,11 @@
 
 <button class="btn btn_general btn-success" @onclick="Save">@SharedLocalizer["MSG_SAVE"]</button>
 
+
 @code{
-    [CascadingParameter]
+    [Parameter]
     public Models.Customer parCustomer { get; set ; }
+    protected IEnumerable<Cautionem.Models.CustomerContact> parCustomerContacts = new List<Cautionem.Models.CustomerContact>();
 
     private async void Save()
     {

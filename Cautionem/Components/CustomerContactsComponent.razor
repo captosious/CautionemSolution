@@ -1,22 +1,22 @@
-﻿@page "/CustomerContacts"
+﻿@page "/CustomerContactsComponent"
 @using Cautionem.Models
 @using System.Linq
 
 @inject Cautionem.Data.CustomerContactService customerContactService
 @inject IStringLocalizer<Components.Customer> Localizer
 
-<h2>@Localizer["customercontacts"]</h2>
-<div>
-    <DataGrid TItem="Cautionem.Models.CustomerContact" Data="@customersContacts" @bind-SelectedRow="@customerContactEdit" RowClicked="@RowClicking" Editable="false" Filterable="true" Sortable="true" ShowPager="true" PageSize="10" Narrow="true" Hoverable="true">
-        <DataGridCommandColumn TItem="Cautionem.Models.CustomerContact" />
+<h2>HOLA!!!!</h2>
+<br />
 
-        <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Name)" Caption="@Localizer["name"]" TextAlignment="TextAlignment.Justified" />
-        <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Email)" Caption="@Localizer["email"]" TextAlignment="TextAlignment.Justified" />
-        <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Phone)" Caption="@Localizer["phone"]" TextAlignment="TextAlignment.Justified" />
-    </DataGrid>
-</div>
+<DataGrid TItem="Cautionem.Models.CustomerContact" Data="@parCustomerContacts" @bind-SelectedRow="@customerContactEdit" RowClicked="@RowClicking" Editable="false" Filterable="true" Sortable="true" ShowPager="true" PageSize="10" Narrow="true" Hoverable="true">
+    <DataGridCommandColumn TItem="Cautionem.Models.CustomerContact" />
 
-@if(ShowDetail)
+    <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Name)" Caption="@Localizer["name"]" TextAlignment="TextAlignment.Justified" />
+    <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Email)" Caption="@Localizer["email"]" TextAlignment="TextAlignment.Justified" />
+    <DataGridColumn TItem="Cautionem.Models.CustomerContact" Field="@nameof(Cautionem.Models.CustomerContact.Phone)" Caption="@Localizer["phone"]" TextAlignment="TextAlignment.Justified" />
+</DataGrid>
+
+@if (ShowDetail)
 {
     <div>
         <Addons>
@@ -102,7 +102,7 @@
             </Addon>
         </Addons>
     </div>
-    
+
     <button class="btn btn_general btn-warning" @onclick="DeleteCustomerContact">@SharedLocalizer["MSG_DELETE"]</button>
     <button class="btn btn_general btn-success" @onclick="SaveCustomerContact">@SharedLocalizer["MSG_SAVE"]</button>
 }
@@ -113,12 +113,16 @@
 }
 
 @code{
-    [CascadingParameter]
-    public Models.Customer parCustomer { get; set; }
+    [Parameter]
+    public Cautionem.Models.Customer parCustomer { get; set; }
+    [Parameter]
+    public IEnumerable<Cautionem.Models.CustomerContact> parCustomerContacts { get; set; }
+    [Parameter]
+    public EventCallback<Cautionem.Models.CustomerContact> OnCustomerContactAdded { get; set; }
 
     private Cautionem.Models.CustomerContact customerContactEdit = new Cautionem.Models.CustomerContact();
-    
-    //public IEnumerable<Cautionem.Models.CustomerContact> customersContacts { get; set; }
+
+    //private IEnumerable<Cautionem.Models.CustomerContact> customersContacts { get; set; }
     private IEnumerable<Cautionem.Models.CustomerContact> customersContacts = new List<Cautionem.Models.CustomerContact>();
 
     private bool IsNew = false;
@@ -126,39 +130,32 @@
 
     protected override async Task OnInitializedAsync()
     {
-        myBlocker.Show();
-        customersContacts = await customerContactService.GetAll(parCustomer);
-        myBlocker.Hide();
-    }
 
-    public override async Task SetParametersAsync(ParameterView parameters)
-    {
-
-        //ShowDetail = false;
         //customersContacts = await customerContactService.GetAll(parCustomer);
-        //myBlocker.Hide();
+
     }
 
     protected void RowClicking()
     {
         ShowDetail = true;
-        StateHasChanged();
+        IsNew = false;
+        //StateHasChanged();
     }
 
     protected void NewCustomerContact()
     {
         customerContactEdit = new CustomerContact();
-        customerContactEdit.CompanyId = 1;
-        customerContactEdit.CustomerId = int.Parse(parCustomer.CustomerId.ToString());
+        customerContactEdit.CompanyId = parCustomer.CompanyId;
+        customerContactEdit.CustomerId = parCustomer.CustomerId;
         ShowDetail = true;
         IsNew = true;
-        StateHasChanged();
     }
 
     protected void DeleteCustomerContact()
     {
         customerContactService.Delete(customerContactEdit);
-        //StateHasChanged();
+        customerContactEdit = new CustomerContact();
+        ShowDetail = false;
     }
 
     protected async void SaveCustomerContact()
@@ -166,7 +163,9 @@
         if (IsNew)
         {
             await customerContactService.Add(customerContactEdit);
-            StateHasChanged();
+            //parCustomerContacts.Add(customerContactEdit);
+            //StateHasChanged();
+            ShowDetail = false;
         }
         else
         {

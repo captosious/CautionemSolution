@@ -24,7 +24,7 @@ namespace Cautionem.Data
         {
             try
             {
-                return await Task.FromResult((IEnumerable<CustomerContact>)cautionemContext.CustomerContacts.AsEnumerable().Where(x => x.CompanyId == customer.CompanyId && x.CustomerId==customer.CustomerId));
+                return await Task.FromResult((IEnumerable<CustomerContact>)cautionemContext.CustomerContacts.Where(x => x.CompanyId == customer.CompanyId && x.CustomerId==customer.CustomerId));
             }
             catch
             {
